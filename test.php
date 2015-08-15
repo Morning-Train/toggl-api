@@ -35,7 +35,9 @@ echo '<pre>';
 
 //$result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
 
-$result = $toggl_client->getProjectUsers(10872705);
+//$result = $toggl_client->getProjectUsers(10872705);
+
+$result = $toggl_client->getWorkspaces();
 
 var_dump($result);
 

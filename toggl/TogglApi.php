@@ -68,12 +68,6 @@ class TogglApi {
 		return false;
 	}
 	
-	/* ME */	
-	
-	public function getMe(){
-		return $this->GET('me');
-	}
-	
 	/* 	CLIENTS 
 	
 		Client has the following properties
@@ -109,6 +103,20 @@ class TogglApi {
 	public function getClientById($clientId){
 		return $this->GET('clients/'.$clientId);
 	}
+	
+	/* 	PROJECTS USERS
+	
+		Project user has the following properties
+
+		pid: project ID (integer, required)
+		uid: user ID, who is added to the project (integer, required)
+		wid: workspace ID, where the project belongs to (integer, not-required, project's workspace id is used)
+		manager: admin rights for this project (boolean, default false)
+		rate: hourly rate for the project user (float, not-required, only for pro workspaces) in the currency of the project's client or in workspace default currency.
+		at: timestamp that is sent in the response, indicates when the project user was last updated
+		Workspace id (wid), project id (pid) and user id (uid) can't be changed on update.
+
+	*/
 	
 	/* 	PROJECTS
 	
@@ -174,6 +182,59 @@ class TogglApi {
 	public function getDashboadForWorkspace($workspaceId){
 		return $this->GET('dashboard/'.$workspaceId);
 	}
+	
+	/* 	USERS
+	
+		User has the following properties
+
+		api_token: (string)
+		default_wid: default workspace id (integer)
+		email: (string)
+		jquery_timeofday_format: (string)
+		jquery_date_format:(string)
+		timeofday_format: (string)
+		date_format: (string)
+		store_start_and_stop_time: whether start and stop time are saved on time entry (boolean)
+		beginning_of_week: (integer 0-6, Sunday=0)
+		language: user's language (string)
+		image_url: url with the user's profile picture(string)
+		sidebar_piechart: should a piechart be shown on the sidebar (boolean)
+		at: timestamp of last changes
+		new_blog_post: an object with toggl blog post title and link
+		send_product_emails: (boolean) Toggl can send newsletters over e-mail to the user
+		send_weekly_report: (boolean) if user receives weekly report
+		send_timer_notifications: (boolean) email user about long-running (more than 8 hours) tasks
+		openid_enabled: (boolean) google signin enabled
+		timezone: (string) timezone user has set on the "My profile" page ( IANA TZ timezones )
+
+	*/	
+	
+	public function getMe(){
+		return $this->GET('me');
+	}
+	
+	/*	WORKSPACES
+	
+		Workspace has the following properties
+
+		name: the name of the workspace (string)
+		premium: If it's a pro workspace or not. Shows if someone is paying for the workspace or not (boolean)
+		admin: shows whether currently requesting user has admin access to the workspace (boolean)
+		default_hourly_rate: default hourly rate for workspace, won't be shown to non-admins if the only_admins_see_billable_rates flag is set to true (float)
+		default_currency: default currency for workspace (string)
+		only_admins_may_create_projects: whether only the admins can create projects or everybody (boolean)
+		only_admins_see_billable_rates: whether only the admins can see billable rates or everybody (boolean)
+		rounding: type of rounding (integer)
+		rounding_minutes: round up to nearest minute (integer)
+		at: timestamp that indicates the time workspace was last updated
+		logo_url: URL pointing to the logo (if set, otherwise omited) (string)	
+	*/
+	
+	public function getWorkspaces(){
+		return $this->GET('workspaces');
+	}
+	
+	
 }
 
 ?>
