@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 require 'toggl/TogglApi.php';
-//require 'toggl/TogglReportsApi.php';
+require 'toggl/TogglReportsApi.php';
 
 define('TOGGL_API_KEY', 'a03a80361f3ad4d3c4b43afac5a975c5');
 
@@ -15,6 +15,7 @@ define('TEST_PROJECT_ID', 10892943);
 define('TEST_TIMEENTRY_ID', 262405902);
 
 $toggl_client = new TogglApi(TOGGL_API_KEY);
+$toggl_reports_client = new TogglReportsApiApi(TOGGL_API_KEY);
 
 echo '<pre>';
 
