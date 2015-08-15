@@ -41,7 +41,9 @@ echo '<pre>';
 
 //$result = $toggl_client->getWorkspaces();
 
-$result = $toggl_client->getWorkspace(TEST_WORKSPACE_ID);
+//$result = $toggl_client->getWorkspace(TEST_WORKSPACE_ID);
+
+//$result = $toggl_client->updateWorkspace(TEST_WORKSPACE_ID, ['name' => 'Morning Train']);
 
 var_dump($result);
 

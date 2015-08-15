@@ -238,6 +238,10 @@ class TogglApi {
 		return $this->GET('workspaces/'.$wid);
 	}
 	
+	public function updateWorkspace($wid, $args){
+		return $this->PUT('workspaces/'.$wid, ['workspace' => $args]);
+	}
+	
 	
 }
 
