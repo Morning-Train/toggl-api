@@ -102,6 +102,11 @@ class TogglApi {
 		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
 	}
 	
+	/* DASHBOARD */
+	
+	public function getDashboadForWorkspace($workspaceId){
+		return $this->GET('dashboard/'.$workspaceId);
+	}
 }
 
 ?>

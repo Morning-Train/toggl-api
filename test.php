@@ -23,7 +23,9 @@ echo '<pre>';
 
 //$result = $toggl_client->getProjectsByClientId(17376957);
 
-$result = $toggl_client->getMe();
+//$result = $toggl_client->getMe();
+
+//$result = $toggl_client->getDashboadForWorkspace(723463);
 
 var_dump($result);
 
