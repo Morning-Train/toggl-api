@@ -242,6 +242,10 @@ class TogglApi {
 		return $this->PUT('workspaces/'.$wid, ['workspace' => $args]);
 	}
 	
+	public function getWorkspaceUsers($wid){
+		return $this->GET('workspaces/'.$wid.'/users');
+	}
+	
 	
 }
 
