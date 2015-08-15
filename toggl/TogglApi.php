@@ -155,8 +155,12 @@ class TogglApi {
 		return $this->DELETE('projects/'.implode(',', $projectIds));
 	}
 	
-	public function getProjectUsers($projectId, $active = 'true'){
+	public function getProjectUserRelations($projectId, $active = 'true'){
 		return $this->GET('projects/'.$projectId.'/project_users');
+	}
+	
+	public function getProjectTasks($projectId, $active = 'true'){
+		return $this->GET('projects/'.$projectId.'/tasks');
 	}
 	
 	/* 	DASHBOARD (https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md)

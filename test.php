@@ -37,7 +37,7 @@ echo '<pre>';
 
 // $result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
 
-// $result = $toggl_client->getProjectUsers(10872705);
+// $result = $toggl_client->getProjectUserRelations(10872705);
 
 // $result = $toggl_client->getWorkspaces();
 
@@ -72,6 +72,8 @@ echo '<pre>';
 // $result = $toggl_client->updateTasks([7205119, 7205121, 7205122], ['estimated_seconds' => 3600]);
 
 // $result = $toggl_client->deleteTasks([7205119, 7205121, 7205122]);
+
+// $result = $toggl_client->getProjectTasks(10892640);
 
 if(isset($result)){
 	var_dump($result);
