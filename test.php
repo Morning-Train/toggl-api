@@ -129,7 +129,15 @@ echo '<pre>';
 
 // $result = $toggl_client->updateTagsForTimeEntries([262400713, 262404562, 262405902, 262409049], ['tags' => ['Udvikling Back-end'], 'tag_action' => 'add']);
 
-$result = $toggl_reports_client->getProjectReport('API', TEST_WORKSPACE_ID, TEST_PROJECT_ID);
+// $result = $toggl_reports_client->getDetailsReport(['workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
+
+// $result = $toggl_reports_client->getSummaryReport(['workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
+
+// $result = $toggl_reports_client->getProjectReport(['project_id' => TEST_PROJECT_ID, 'workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
+
+
+// $result = $toggl_reports_client->getAvailableEndpoints();
+
 
 if(isset($result)){
 	var_dump($result);

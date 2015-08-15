@@ -68,6 +68,10 @@ class TogglApi {
 		return false;
 	}
 	
+	public function getAvailableEndpoints(){
+		return $this->get('');
+	}
+	
 	/* 	CLIENTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md)
 	
 		Client has the following properties
