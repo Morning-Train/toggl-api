@@ -253,6 +253,18 @@ class TogglApi {
 		return $this->GET('me');
 	}
 	
+	public function updateMe($args){
+		return $this->PUT('me', ['user' => $args]);
+	}
+	
+	public function signup($args){
+		return $this->POST('signups', ['user' => $args]);
+	}
+	
+	public function resetApiToken(){
+		return $this->POST('reset_token');
+	}
+	
 	/*	WORKSPACES (https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md)
 	
 		Workspace has the following properties

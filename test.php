@@ -28,7 +28,7 @@ echo '<pre>';
 
 // $result = $toggl_client->getClientProjects(17376957);
 
-$result = $toggl_client->getActiveClientProjects(17376957);
+// $result = $toggl_client->getActiveClientProjects(17376957);
 
 // $result = $toggl_client->getInactiveClientProjects(17376957);
 
@@ -95,6 +95,8 @@ $result = $toggl_client->getActiveClientProjects(17376957);
 // $result = $toggl_client->deleteProjectUsers([18636939, 18636940]);
 
 // $result = $toggl_client->createProjectUsers(['uid' => implode(',', [TEST_USER_ID, TEST_USER_ID2]), 'pid' => TEST_PROJECT_ID, 'rate' => 200]);
+
+// $result = $toggl_client->updateMe(['fullname' => 'Bjarne Bonde']);
 
 
 if(isset($result)){
