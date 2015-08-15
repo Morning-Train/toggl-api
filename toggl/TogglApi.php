@@ -19,7 +19,37 @@ class TogglApi {
 	
 	private function GET($endpoint, $args = array()){		
 		try {
-			$response = $this->client->get($endpoint, $args);
+			$response = $this->client->get($endpoint, ['body' => json_encode($args)]);
+			return $this->checkResponse($response);
+		} catch (ClientException $e) {
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	
+	private function POST($endpoint, $args = array()){		
+		try {
+			$response = $this->client->post($endpoint, ['body' => json_encode($args)]);
+			return $this->checkResponse($response);
+		} catch (ClientException $e) {
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	
+	private function PUT($endpoint, $args = array()){		
+		try {
+			$response = $this->client->put($endpoint, ['body' => json_encode($args)]);
+			return $this->checkResponse($response);
+		} catch (ClientException $e) {
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	
+	private function DELETE($endpoint, $args = array()){		
+		try {
+			$response = $this->client->delete($endpoint, ['body' => json_encode($args)]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
 			echo $e->getMessage();
@@ -40,16 +70,26 @@ class TogglApi {
 	
 	/* CLIENTS */
 	
-	public function createClient(){
-	
+	public function createClient($args){
+		return $this->POST('clients', ['client' => $args]);
 	}
 	
-	public function getWorkspaceClients(){
+	public function updateClient($clientId, $args){
+		return $this->PUT('clients/'.$clientId, ['client' => $args]);
+	}
+	
+	public function getClients(){
 		return $this->GET('clients');
 	}
 	
 	public function getClientById($clientId){
 		return $this->GET('clients/'.$clientId);
+	}
+	
+	/* PROJECTS */
+	
+	public function getProjectsByClientId($clientId, $active = 'true'){
+		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
 	}
 	
 }
