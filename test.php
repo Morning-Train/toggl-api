@@ -21,7 +21,7 @@ echo '<pre>';
 
 //$result = $toggl_client->deleteClient(17381177);
 
-//$result = $toggl_client->getProjectsByClientId(17376957);
+//$result = $toggl_client->getClientProjects(17376957);
 
 //$result = $toggl_client->getMe();
 
@@ -33,7 +33,9 @@ echo '<pre>';
 
 //$result = $toggl_client->deleteProject(10892836);
 
-$result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
+//$result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
+
+$result = $toggl_client->getProjectUsers(10872705);
 
 var_dump($result);
 

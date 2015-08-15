@@ -102,6 +102,10 @@ class TogglApi {
 		return $this->GET('clients');
 	}
 	
+	public function getClientProjects($clientId, $active = 'true'){
+		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
+	}
+	
 	public function getClientById($clientId){
 		return $this->GET('clients/'.$clientId);
 	}
@@ -143,8 +147,8 @@ class TogglApi {
 		return $this->DELETE('projects/'.implode(',', $projectIds));
 	}
 	
-	public function getProjectsByClientId($clientId, $active = 'true'){
-		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
+	public function getProjectUsers($projectId, $active = 'true'){
+		return $this->GET('projects/'.$projectId.'/project_users');
 	}
 	
 	/* 	DASHBOARD 
