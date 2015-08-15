@@ -19,7 +19,9 @@ echo '<pre>';
 
 //$result = $toggl_client->createClient(['name' => 'Test client', 'wid' => 723463] );
 
-$result = $toggl_client->updateClient(17381177, ['name' => 'Test client 3']);
+//$result = $toggl_client->updateClient(17381177, ['name' => 'Test client 3']);
+
+$result = $toggl_client->deleteClient(17381177);
 
 //$result = $toggl_client->getProjectsByClientId();
 

@@ -78,6 +78,10 @@ class TogglApi {
 		return $this->PUT('clients/'.$clientId, ['client' => $args]);
 	}
 	
+	public function deleteClient($clientId){
+		return $this->DELETE('clients/'.$clientId);
+	}
+	
 	public function getClients(){
 		return $this->GET('clients');
 	}
