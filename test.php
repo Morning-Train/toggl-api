@@ -12,8 +12,6 @@ $toggl_client = new TogglApi(TOGGL_API_KEY);
 echo '<pre>';
 
 //$result = $toggl_client->getClients();
-	
-//var_dump($result);
 
 //$result = $toggl_client->getClientById(17376957);
 
@@ -21,9 +19,11 @@ echo '<pre>';
 
 //$result = $toggl_client->updateClient(17381177, ['name' => 'Test client 3']);
 
-$result = $toggl_client->deleteClient(17381177);
+//$result = $toggl_client->deleteClient(17381177);
 
-//$result = $toggl_client->getProjectsByClientId();
+//$result = $toggl_client->getProjectsByClientId(17376957);
+
+$result = $toggl_client->getMe();
 
 var_dump($result);
 

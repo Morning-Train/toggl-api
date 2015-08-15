@@ -68,6 +68,12 @@ class TogglApi {
 		return false;
 	}
 	
+	/* ME */	
+	
+	public function getMe(){
+		return $this->GET('me');
+	}
+	
 	/* CLIENTS */
 	
 	public function createClient($args){
