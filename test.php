@@ -133,7 +133,7 @@ echo '<pre>';
 
 // $result = $toggl_reports_client->getSummaryReport(['workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
 
-// $result = $toggl_reports_client->getProjectReport(['project_id' => TEST_PROJECT_ID, 'workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
+// $result = $toggl_reports_client->getProjectReport(['project_id' => 9871882, 'workspace_id' => TEST_WORKSPACE_ID, 'user_agent' => 'API TEST']);
 
 
 // $result = $toggl_reports_client->getAvailableEndpoints();
