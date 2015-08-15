@@ -262,6 +262,31 @@ class TogglApi {
 		return $this->GET('workspaces/'.$wid.'/tags');
 	}
 	
+	/* 	WORKSPACE USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspace_users.md)
+		Workspace user has the following properties:
+
+		id: workspace user id (integer)
+		uid: user id of the workspace user (integer)
+		admin: if user is workspace admin (boolean)
+		active: if the workspace user has accepted the invitation to this workspace (boolean)
+		invite_url: if user has not accepted the invitation the url for accepting his/her invitation is sent when the request is made by workspace_admin
+	*/
+	
+	public function inviteUserToWorkspace(){
+	
+	}
+	
+	public function updateWorkspaceUser($workspaceUserId, $args){
+	
+	}
+	
+	public function deleteWorkspaceUser($workspaceUserId){
+	
+	}
+	
+	public function getWorkspaceUserRelations($wid){
+	
+	}
 	
 }
 
