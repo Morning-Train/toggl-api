@@ -118,6 +118,18 @@ class TogglApi {
 
 	*/
 	
+	public function createProjectUser($args){
+		return $this->POST('project_users', ['project_user' => $args]);
+	}
+	
+	public function updateProjectUser($projectUserId, $args){
+		return $this->PUT('project_users/'.$projectUserId, ['project_user' => $args]);
+	}
+	
+	public function deleteProjectUser($projectUserId){
+		return $this->DELETE('project_users/'.$projectUserId);
+	}
+	
 	/* 	PROJECTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md)
 	
 		Project has the following properties

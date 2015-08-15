@@ -8,6 +8,9 @@ require 'toggl/TogglApi.php';
 define('TOGGL_API_KEY', 'a03a80361f3ad4d3c4b43afac5a975c5');
 
 define('TEST_WORKSPACE_ID', 723463);
+define('TEST_USER_ID', 1689899);
+define('TEST_USER_ID2', 1410149);
+define('TEST_PROJECT_ID', 10892943);
 
 $toggl_client = new TogglApi(TOGGL_API_KEY);
 
@@ -74,6 +77,14 @@ echo '<pre>';
 // $result = $toggl_client->deleteTasks([7205119, 7205121, 7205122]);
 
 // $result = $toggl_client->getProjectTasks(10892640);
+
+// $result = $toggl_client->createProjectUser(['uid' => TEST_USER_ID2, 'pid' => TEST_PROJECT_ID]);
+
+// $result = $toggl_client->updateProjectUser(18636919, ['manager' => true]);
+
+// $result = $toggl_client->deleteProjectUser(18636919);
+
+
 
 if(isset($result)){
 	var_dump($result);
