@@ -234,6 +234,10 @@ class TogglApi {
 		return $this->GET('workspaces');
 	}
 	
+	public function getWorkspace($wid){
+		return $this->GET('workspaces/'.$wid);
+	}
+	
 	
 }
 

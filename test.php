@@ -7,6 +7,8 @@ require 'toggl/TogglApi.php';
 
 define('TOGGL_API_KEY', 'a03a80361f3ad4d3c4b43afac5a975c5');
 
+define('TEST_WORKSPACE_ID', 723463);
+
 $toggl_client = new TogglApi(TOGGL_API_KEY);
 
 echo '<pre>';
@@ -15,7 +17,7 @@ echo '<pre>';
 
 //$result = $toggl_client->getClientById(17376957);
 
-//$result = $toggl_client->createClient(['name' => 'Test client', 'wid' => 723463] );
+//$result = $toggl_client->createClient(['name' => 'Test client', 'wid' => TEST_WORKSPACE_ID] );
 
 //$result = $toggl_client->updateClient(17381177, ['name' => 'Test client 3']);
 
@@ -25,7 +27,7 @@ echo '<pre>';
 
 //$result = $toggl_client->getMe();
 
-//$result = $toggl_client->getDashboadForWorkspace(723463);
+//$result = $toggl_client->getDashboadForWorkspace(TEST_WORKSPACE_ID);
 
 //$result = $toggl_client->createProject(['name' => 'Test projekt']);
 
@@ -37,7 +39,9 @@ echo '<pre>';
 
 //$result = $toggl_client->getProjectUsers(10872705);
 
-$result = $toggl_client->getWorkspaces();
+//$result = $toggl_client->getWorkspaces();
+
+$result = $toggl_client->getWorkspace(TEST_WORKSPACE_ID);
 
 var_dump($result);
 
