@@ -98,6 +98,18 @@ class TogglApi {
 	
 	/* PROJECTS */
 	
+	public function createProject($args){
+		return $this->POST('projects', ['project' => $args]);
+	}
+	
+	public function updateProject($projectId, $args){
+		return $this->PUT('projects/'.$projectId, ['project' => $args]);
+	}
+	
+	public function deleteProject($projectId){
+		return $this->DELETE('projects/'.$projectId);
+	}
+	
 	public function getProjectsByClientId($clientId, $active = 'true'){
 		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
 	}

@@ -27,6 +27,12 @@ echo '<pre>';
 
 //$result = $toggl_client->getDashboadForWorkspace(723463);
 
+//$result = $toggl_client->createProject(['name' => 'Test projekt']);
+
+//$result = $toggl_client->updateProject(10892836, ['name' => 'Test projekt 2']);
+
+//$result = $toggl_client->deleteProject(10892836);
+
 var_dump($result);
 
 echo '</pre>';
