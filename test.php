@@ -15,7 +15,7 @@ define('TEST_PROJECT_ID', 10892943);
 define('TEST_TIMEENTRY_ID', 262405902);
 
 $toggl_client = new TogglApi(TOGGL_API_KEY);
-$toggl_reports_client = new TogglReportsApiApi(TOGGL_API_KEY);
+$toggl_reports_client = new TogglReportsApi(TOGGL_API_KEY);
 
 echo '<pre>';
 
@@ -128,6 +128,8 @@ echo '<pre>';
 // $result = $toggl_client->startTimeEntry(['description' => 'test', 'created_with' => 'API']);
 
 // $result = $toggl_client->updateTagsForTimeEntries([262400713, 262404562, 262405902, 262409049], ['tags' => ['Udvikling Back-end'], 'tag_action' => 'add']);
+
+$result = $toggl_reports_client->getProjectReport('API', TEST_WORKSPACE_ID, TEST_PROJECT_ID);
 
 if(isset($result)){
 	var_dump($result);

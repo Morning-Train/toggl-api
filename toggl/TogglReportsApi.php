@@ -68,7 +68,33 @@ class TogglReportsApi {
 		return false;
 	}
 	
+	/* 	PROJECT (https://github.com/toggl/toggl_api_docs/blob/master/reports/project.md)
+	
+		GET /reports/api/v2/project
 
+		Parameters are:
+
+		user_agent string, required, email, or other way to contact client application developer
+		workspace_id integer, required. The workspace whose data you want to access
+		project_id integer, required. The project whose data you want to access
+		page integer, optional. number of 'tasks_page' you want to fetch
+		order_field string: name/assignee/duration/billable_amount/estimated_seconds
+		order_desc string: on/off, on for descending and off for ascending order
+
+	*/
+	
+	public function getProjectReport($user_agent, $workspace_id, $project_id, $page = 0, $order_field = 'name', $order_desc = 'off'){
+		return $this->get('project?user_agent='.$user_agent
+			.'&workspace_id='.$workspace_id
+			.'&project_id='.$project_id
+			.'&page='.$page
+			.'&order_field='.$order_field
+			.'&order_desc='.$order_desc);
+	}
+	
+	
+	
+	
 }
 
 ?>
