@@ -401,7 +401,65 @@ class TogglApi {
 		return $this->DELETE('tasks/'.implode(',', $taskids));
 	}
 	
+	/* 	TIME ENTRIES (https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md)
+		
+		The requests are scoped with the user whose API token is used. Only his/her time entries are updated, retrieved and created.
+
+		Time entry has the following properties
+
+		description: (string, strongly suggested to be used)
+		wid: workspace ID (integer, required if pid or tid not supplied)
+		pid: project ID (integer, not required)
+		tid: task ID (integer, not required)
+		billable: (boolean, not required, default false, available for pro workspaces)
+		start: time entry start time (string, required, ISO 8601 date and time)
+		stop: time entry stop time (string, not required, ISO 8601 date and time)
+		duration: time entry duration in seconds. If the time entry is currently running, the duration attribute contains a negative value, denoting the start of the time entry in seconds since epoch (Jan 1 1970). The correct duration can be calculated as current_time + duration, where current_time is the current time in seconds since epoch. (integer, required)
+		created_with: the name of your client app (string, required)
+		tags: a list of tag names (array of strings, not required)
+		duronly: should Toggl show the start and stop time of this time entry? (boolean, not required)
+		at: timestamp that is sent in the response, indicates the time item was last updated
+	*/
 	
+	public function createTimeEntry($args){
+		return $this->POST('time_entries', ['time_entry' => $args]);
+	}	
+	
+	public function startTimeEntry($args){
+		return $this->POST('time_entries/start', ['time_entry' => $args]);
+	}	
+	
+	public function stopTimeEntry($timeEntryId){
+		return $this->PUT('time_entries/'.$timeEntryId.'/stop');
+	}
+	
+	public function getTimeEntry($timeEntryId){
+		return $this->GET('time_entries/'.$timeEntryId);
+	}	
+	
+	public function getRunningTimeEntry(){
+		return $this->GET('time_entries/current');
+	}
+	
+	public function getTimeEntries(){
+		return $this->GET('time_entries');
+	}	
+	
+	public function getTimeEntriesInRange($start, $end){
+		return $this->GET('time_entries?start_date='.urlencode($start).'&end_date='.urlencode($end));
+	}	
+	
+	public function updateTagsForTimeEntries($timeEntryIds, $args){
+		return $this->PUT('time_entries/'.implode(',', $timeEntryIds), ['time_entry' => $args]);
+	}
+	
+	public function updateTimeEntry($timeEntryId, $args){
+		return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $args]);
+	}	
+	
+	public function deleteTimeEntry($timeEntryId){
+		return $this->DELETE('time_entries/'.$timeEntryId);
+	}	
 	
 }
 

@@ -12,6 +12,8 @@ define('TEST_USER_ID', 1689899);
 define('TEST_USER_ID2', 1410149);
 define('TEST_PROJECT_ID', 10892943);
 
+define('TEST_TIMEENTRY_ID', 262405902);
+
 $toggl_client = new TogglApi(TOGGL_API_KEY);
 
 echo '<pre>';
@@ -98,7 +100,7 @@ echo '<pre>';
 
 // $result = $toggl_client->updateMe(['fullname' => 'Bjarne Bonde']);
 
-$newTestWorkspaceId = 1057336;
+// $newTestWorkspaceId = 1057336;
 
 // $result = $toggl_client->inviteUsersToWorkspace($newTestWorkspaceId, ['bjarne.bonde@hotmail.com']);
 
@@ -107,6 +109,24 @@ $newTestWorkspaceId = 1057336;
 // $result = $toggl_client->deleteWorkspaceUser(1421632);
 
 // $result = $toggl_client->getWorkspaceUserRelations($newTestWorkspaceId);
+
+// $result = $toggl_client->getRunningTimeEntry();
+
+// $result = $toggl_client->getTimeEntry(TEST_TIMEENTRY_ID);
+
+// $result = $toggl_client->stopTimeEntry(TEST_TIMEENTRY_ID);
+
+// $result = $toggl_client->createTimeEntry(['start' => '2015-08-15T14:31:00.000Z', 'duration' => 1200, 'description' => 'test', 'created_with' => 'API']);
+
+// $result = $toggl_client->getTimeEntries();
+
+// $result = $toggl_client->getTimeEntriesInRange('2015-08-15T01:00:00+02:00', '2015-08-16T00:01:00+02:00');
+
+// $result = $toggl_client->deleteTimeEntry(262408850);
+
+// $result = $toggl_client->startTimeEntry(['description' => 'test', 'created_with' => 'API']);
+
+// $result = $toggl_client->updateTagsForTimeEntries([262400713, 262404562, 262405902, 262409049], ['tags' => ['Udvikling Back-end'], 'tag_action' => 'add']);
 
 if(isset($result)){
 	var_dump($result);
