@@ -61,7 +61,21 @@ echo '<pre>';
 
 // $result = $toggl_client->deleteTag(1517759);
 
-var_dump($result);
+// $result = $toggl_client->createTask(['name' => 'Test task '.time(), 'pid' => 10892640]);
+
+// $result = $toggl_client->updateTask(7205119, ['name' => 'Test task 2 '.time()]);
+
+// $result = $toggl_client->getTask(7205120);
+
+// $result = $toggl_client->deleteTask(7205120);
+
+// $result = $toggl_client->updateTasks([7205119, 7205121, 7205122], ['estimated_seconds' => 3600]);
+
+// $result = $toggl_client->deleteTasks([7205119, 7205121, 7205122]);
+
+if(isset($result)){
+	var_dump($result);
+}
 
 echo '</pre>';
 

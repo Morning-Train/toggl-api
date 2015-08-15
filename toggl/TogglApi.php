@@ -289,9 +289,11 @@ class TogglApi {
 	}
 	
 	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
+	
 		Tag has the following properties
-			name: The name of the tag (string, required, unique in workspace)
-			wid: workspace ID, where the tag will be used (integer, required)
+		
+		name: The name of the tag (string, required, unique in workspace)
+		wid: workspace ID, where the tag will be used (integer, required)
 	*/
 	
 	public function createTag($args){
@@ -304,6 +306,47 @@ class TogglApi {
 	
 	public function deleteTag($tagid){
 		return $this->DELETE('tags/'.$tagid);
+	}
+	
+	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
+	
+		Tasks are available only for pro workspaces.
+
+		Task has the following properties
+
+		name: The name of the task (string, required, unique in project)
+		pid: project ID for the task (integer, required)
+		wid: workspace ID, where the task will be saved (integer, project's workspace id is used when not supplied)
+		uid: user ID, to whom the task is assigned to (integer, not required)
+		estimated_seconds: estimated duration of task in seconds (integer, not required)
+		active: whether the task is done or not (boolean, by default true)
+		at: timestamp that is sent in the response for PUT, indicates the time task was last updated
+		tracked_seconds: total time tracked (in seconds) for the task
+		Workspace id (wid) and project id (pid) can't be changed on update.
+	*/
+	
+	public function getTask($taskid){
+		return $this->GET('tasks/'.$taskid);
+	}
+	
+	public function createTask($args){
+		return $this->POST('tasks', ['task' => $args]);
+	}
+	
+	public function updateTask($taskid, $args){
+		return $this->PUT('tasks/'.$taskid, ['task' => $args]);
+	}
+	
+	public function updateTasks($taskids, $args){
+		return $this->PUT('tasks/'.implode(',', $taskids), ['task' => $args]);
+	}
+	
+	public function deleteTask($taskid){
+		return $this->DELETE('tasks/'.$taskid);
+	}
+	
+	public function deleteTasks($taskids){
+		return $this->DELETE('tasks/'.implode(',', $taskids));
 	}
 	
 	
