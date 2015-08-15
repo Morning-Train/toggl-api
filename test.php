@@ -33,6 +33,8 @@ echo '<pre>';
 
 //$result = $toggl_client->deleteProject(10892836);
 
+$result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
+
 var_dump($result);
 
 echo '</pre>';
