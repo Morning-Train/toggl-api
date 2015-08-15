@@ -68,7 +68,7 @@ class TogglApi {
 		return false;
 	}
 	
-	/* 	CLIENTS 
+	/* 	CLIENTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md)
 	
 		Client has the following properties
 
@@ -104,7 +104,7 @@ class TogglApi {
 		return $this->GET('clients/'.$clientId);
 	}
 	
-	/* 	PROJECTS USERS
+	/* 	PROJECTS USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md)
 	
 		Project user has the following properties
 
@@ -118,7 +118,7 @@ class TogglApi {
 
 	*/
 	
-	/* 	PROJECTS
+	/* 	PROJECTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md)
 	
 		Project has the following properties
 
@@ -159,7 +159,7 @@ class TogglApi {
 		return $this->GET('projects/'.$projectId.'/project_users');
 	}
 	
-	/* 	DASHBOARD 
+	/* 	DASHBOARD (https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md)
 	
 		Dashboard's main purpose is to give an overview of what users in the workspace are doing and have been doing. Dashboard request returns two objects:
 
@@ -183,7 +183,7 @@ class TogglApi {
 		return $this->GET('dashboard/'.$workspaceId);
 	}
 	
-	/* 	USERS
+	/* 	USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/users.md)
 	
 		User has the following properties
 
@@ -213,7 +213,7 @@ class TogglApi {
 		return $this->GET('me');
 	}
 	
-	/*	WORKSPACES
+	/*	WORKSPACES (https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md)
 	
 		Workspace has the following properties
 
