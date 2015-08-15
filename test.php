@@ -55,6 +55,12 @@ echo '<pre>';
 
 // $result = $toggl_client->getWorkspaceTags(TEST_WORKSPACE_ID);
 
+// $result = $toggl_client->createTag(['name' => 'test tag', 'wid' => TEST_WORKSPACE_ID]);
+
+// $result = $toggl_client->updateTag(1517759, ['name' => 'test tag 2']);
+
+// $result = $toggl_client->deleteTag(1517759);
+
 var_dump($result);
 
 echo '</pre>';

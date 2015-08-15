@@ -288,6 +288,26 @@ class TogglApi {
 	
 	}
 	
+	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
+		Tag has the following properties
+			name: The name of the tag (string, required, unique in workspace)
+			wid: workspace ID, where the tag will be used (integer, required)
+	*/
+	
+	public function createTag($args){
+		return $this->POST('tags', ['tag' => $args]);
+	}
+	
+	public function updateTag($tagid, $args){
+		return $this->PUT('tags/'.$tagid, ['tag' => $args]);
+	}
+	
+	public function deleteTag($tagid){
+		return $this->DELETE('tags/'.$tagid);
+	}
+	
+	
+	
 }
 
 ?>
