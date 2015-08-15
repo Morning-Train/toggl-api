@@ -98,6 +98,15 @@ echo '<pre>';
 
 // $result = $toggl_client->updateMe(['fullname' => 'Bjarne Bonde']);
 
+$newTestWorkspaceId = 1057336;
+
+// $result = $toggl_client->inviteUsersToWorkspace($newTestWorkspaceId, ['bjarne.bonde@hotmail.com']);
+
+// $result = $toggl_client->updateWorkspaceUser(1421632, ['admin' => true]);
+
+// $result = $toggl_client->deleteWorkspaceUser(1421632);
+
+// $result = $toggl_client->getWorkspaceUserRelations($newTestWorkspaceId);
 
 if(isset($result)){
 	var_dump($result);

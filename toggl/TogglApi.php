@@ -324,20 +324,20 @@ class TogglApi {
 		invite_url: if user has not accepted the invitation the url for accepting his/her invitation is sent when the request is made by workspace_admin
 	*/
 	
-	public function inviteUserToWorkspace(){
-	
+	public function inviteUsersToWorkspace($wid, $args){
+		return $this->POST('workspaces/'.$wid.'/invite', ['emails' => $args]);
 	}
 	
 	public function updateWorkspaceUser($workspaceUserId, $args){
-	
+		return $this->PUT('workspace_users/'.$workspaceUserId, ['workspace_user' => $args]);
 	}
 	
 	public function deleteWorkspaceUser($workspaceUserId){
-	
+		return $this->DELETE('workspace_users/'.$workspaceUserId);	
 	}
 	
 	public function getWorkspaceUserRelations($wid){
-	
+		return $this->GET('workspaces/'.$wid.'/workspace_users');
 	}
 	
 	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
