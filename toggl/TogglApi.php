@@ -96,8 +96,20 @@ class TogglApi {
 		return $this->GET('clients');
 	}
 	
-	public function getClientProjects($clientId, $active = 'true'){
-		return $this->GET('clients/'.$clientId.'/projects', ['active' => $active]);
+	public function getClientProjects($clientId){
+		return $this->GET('clients/'.$clientId.'/projects');
+	}
+	
+	public function getActiveClientProjects($clientId){
+		return $this->GET('clients/'.$clientId.'/projects?active=true');
+	}
+	
+	public function getInactiveClientProjects($clientId){
+		return $this->GET('clients/'.$clientId.'/projects?active=false');
+	}
+	
+	public function getAllClientProjects($clientId){
+		return $this->GET('clients/'.$clientId.'/projects?active=both');
 	}
 	
 	public function getClientById($clientId){

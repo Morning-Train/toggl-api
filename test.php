@@ -28,6 +28,12 @@ echo '<pre>';
 
 // $result = $toggl_client->getClientProjects(17376957);
 
+$result = $toggl_client->getActiveClientProjects(17376957);
+
+// $result = $toggl_client->getInactiveClientProjects(17376957);
+
+// $result = $toggl_client->getAllClientProjects(17376957);
+
 // $result = $toggl_client->getMe();
 
 // $result = $toggl_client->getDashboadForWorkspace(TEST_WORKSPACE_ID);
@@ -40,7 +46,7 @@ echo '<pre>';
 
 // $result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
 
-$result = $toggl_client->getProjectUserRelations(TEST_PROJECT_ID);
+// $result = $toggl_client->getProjectUserRelations(TEST_PROJECT_ID);
 
 // $result = $toggl_client->getWorkspaces();
 
