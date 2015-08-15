@@ -122,12 +122,24 @@ class TogglApi {
 		return $this->POST('project_users', ['project_user' => $args]);
 	}
 	
+	public function createProjectUsers($args){
+		return $this->POST('project_users', ['project_user' => $args]);
+	}
+	
 	public function updateProjectUser($projectUserId, $args){
 		return $this->PUT('project_users/'.$projectUserId, ['project_user' => $args]);
 	}
 	
+	public function updateProjectUsers($projectUserIds, $args){
+		return $this->PUT('project_users/'.implode(',', $projectUserIds), ['project_user' => $args]);
+	}
+	
 	public function deleteProjectUser($projectUserId){
 		return $this->DELETE('project_users/'.$projectUserId);
+	}
+	
+	public function deleteProjectUsers($projectUserIds){
+		return $this->DELETE('project_users/'.implode(',', $projectUserIds));
 	}
 	
 	/* 	PROJECTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md)

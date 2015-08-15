@@ -40,7 +40,7 @@ echo '<pre>';
 
 // $result = $toggl_client->deleteProjects([10892842, 10892843, 10892844]);
 
-// $result = $toggl_client->getProjectUserRelations(10872705);
+$result = $toggl_client->getProjectUserRelations(TEST_PROJECT_ID);
 
 // $result = $toggl_client->getWorkspaces();
 
@@ -84,6 +84,11 @@ echo '<pre>';
 
 // $result = $toggl_client->deleteProjectUser(18636919);
 
+// $result = $toggl_client->updateProjectUsers([18636921, 18636913], ['rate' => 200]);
+
+// $result = $toggl_client->deleteProjectUsers([18636939, 18636940]);
+
+// $result = $toggl_client->createProjectUsers(['uid' => implode(',', [TEST_USER_ID, TEST_USER_ID2]), 'pid' => TEST_PROJECT_ID, 'rate' => 200]);
 
 
 if(isset($result)){
