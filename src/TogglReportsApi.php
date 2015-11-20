@@ -1,5 +1,7 @@
 <?php
 
+namespace MorningTrain\TogglApi;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
