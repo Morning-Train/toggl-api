@@ -204,6 +204,10 @@ class TogglApi {
 	public function getProjectTasks($projectId, $active = 'true'){
 		return $this->GET('projects/'.$projectId.'/tasks');
 	}
+
+	public function getProject($projectId){
+		return $this->GET('projects/'.$projectId);
+	}
 	
 	/* 	DASHBOARD (https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md)
 	
