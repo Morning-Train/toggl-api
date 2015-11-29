@@ -2,6 +2,10 @@
 ***
 PHP class to connect with the Toggl API.
 
+
+This was coded on an early http://morningtrain.dk
+
+
 ## Dependencies
 ***
 It depends on guzzlehttp/guzzle ver.6.
