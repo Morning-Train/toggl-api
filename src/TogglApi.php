@@ -19,7 +19,7 @@ class TogglApi {
 		]);		
 	}
 	
-	private function GET($endpoint, $body = array(), $query){
+	private function GET($endpoint, $body = array(), $query = array()){
 		try {
 			$response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
@@ -31,7 +31,7 @@ class TogglApi {
 		}
 	}
 	
-	private function POST($endpoint, $body = array(), $query){
+	private function POST($endpoint, $body = array(), $query = array()){
 		try {
 			$response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
@@ -43,7 +43,7 @@ class TogglApi {
 		}
 	}
 	
-	private function PUT($endpoint, $body = array(), $query){
+	private function PUT($endpoint, $body = array(), $query = array()){
 		try {
 			$response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
@@ -55,7 +55,7 @@ class TogglApi {
 		}
 	}
 	
-	private function DELETE($endpoint, $body = array(), $query){
+	private function DELETE($endpoint, $body = array(), $query = array()){
 		try {
 			$response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
