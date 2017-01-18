@@ -15,6 +15,7 @@ composer require morningtrain/toggl-api
 It depends on guzzlehttp/guzzle ver.6.
 
 Guzzle can be added with the following composer snippet:
+(or automatically when installing through composer)
 
 ```
 {
