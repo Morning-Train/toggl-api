@@ -50,43 +50,51 @@ class TogglReportsApi {
 		]);		
 	}
 	
-	private function GET($endpoint, $args = array()){		
+	private function GET($endpoint, $query = array()){		
 		try {
-			$response = $this->client->get($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->get($endpoint, ['query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
 		}
 	}
 	
-	private function POST($endpoint, $args = array()){		
+	private function POST($endpoint, $query = array()){		
 		try {
-			$response = $this->client->post($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->post($endpoint, ['query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
 		}
 	}
 	
-	private function PUT($endpoint, $args = array()){		
+	private function PUT($endpoint, $query = array()){		
 		try {
-			$response = $this->client->put($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->put($endpoint, ['query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
 		}
 	}
 	
-	private function DELETE($endpoint, $args = array()){		
+	private function DELETE($endpoint, $query = array()){		
 		try {
-			$response = $this->client->delete($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->delete($endpoint, ['query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
 		}
 	}
 	
@@ -105,20 +113,20 @@ class TogglReportsApi {
 		return $this->get('');
 	}
 	
-	public function getProjectReport($args){
-		return $this->get('project?'.http_build_query ($args));
+	public function getProjectReport($query){
+		return $this->get('project', $query));
 	}
 	
-	public function getSummaryReport($args){
-		return $this->get('summary?'.http_build_query ($args));
+	public function getSummaryReport($query){
+		return $this->get('summary', $query));
 	}
 	
-	public function getDetailsReport($args){
-		return $this->get('details?'.http_build_query ($args));
+	public function getDetailsReport($query){
+		return $this->get('details', $query));
 	}
 	
-	public function getWeeklyReport($args){
-		return $this->get('weekly?'.http_build_query ($args));
+	public function getWeeklyReport($query){
+		return $this->get('weekly', $query));
 	}
 	
 	
