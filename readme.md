@@ -38,6 +38,12 @@ https://github.com/toggl/toggl_api_docs
 $toggl = new MorningTrain\TogglApi\TogglApi('my-api-token');
 ```
 
+### Get available endpoints
+
+```
+$toggl->getAvailableEndpoints();
+```
+
 ### Clients
 
 https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
@@ -385,6 +391,7 @@ $toggl->deleteTimeEntry($timeEntryIds);
 ```
 
 ## Reports API
+https://github.com/toggl/toggl_api_docs/blob/master/reports.md
 
 ### Initialization
 
@@ -392,6 +399,32 @@ $toggl->deleteTimeEntry($timeEntryIds);
 $toggl = new MorningTrain\TogglApi\TogglReportsApi('my-api-token');
 ```
 
+### Get available endpoints
 
+```
+$toggl->getAvailableEndpoints();
+```
+
+### Methods
+
+#### Get project report
+```
+$toggl->getProjectReport($query);
+```
+
+#### Get summary report
+```
+$toggl->getSummaryReport($query);
+```
+
+#### Get details report
+```
+$toggl->getDetailsReport($query);
+```
+
+#### Get weekly report
+```
+$toggl->getWeeklyReport($query);
+```
 
 
