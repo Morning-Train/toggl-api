@@ -25,9 +25,9 @@ class TogglApi {
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
 			return (object) [
-                'success' => false,
-                'message' => $e->getMessage()
-            ];
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
@@ -37,9 +37,9 @@ class TogglApi {
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
 			return (object) [
-                'success' => false,
-                'message' => $e->getMessage()
-            ];
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
@@ -49,9 +49,9 @@ class TogglApi {
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
 			return (object) [
-                'success' => false,
-                'message' => $e->getMessage()
-            ];
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
@@ -61,9 +61,9 @@ class TogglApi {
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
 			return (object) [
-                'success' => false,
-                'message' => $e->getMessage()
-            ];
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
