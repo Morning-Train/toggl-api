@@ -2,6 +2,12 @@
 ***
 PHP class to connect with the Toggl API.
 
+##Installation
+It can be installed with composer
+```
+composer require morningtrain/toggl-api
+```
+
 ## Dependencies
 ***
 It depends on guzzlehttp/guzzle ver.6.
