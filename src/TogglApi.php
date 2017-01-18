@@ -19,43 +19,51 @@ class TogglApi {
 		]);		
 	}
 	
-	private function GET($endpoint, $args = array()){		
+	private function GET($endpoint, $body = array(), $query = array()){
 		try {
-			$response = $this->client->get($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
-	private function POST($endpoint, $args = array()){		
+	private function POST($endpoint, $body = array(), $query = array()){
 		try {
-			$response = $this->client->post($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
-	private function PUT($endpoint, $args = array()){		
+	private function PUT($endpoint, $body = array(), $query = array()){
 		try {
-			$response = $this->client->put($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
-	private function DELETE($endpoint, $args = array()){		
+	private function DELETE($endpoint, $body = array(), $query = array()){
 		try {
-			$response = $this->client->delete($endpoint, ['body' => json_encode($args)]);
+			$response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
 			return $this->checkResponse($response);
 		} catch (ClientException $e) {
-			echo $e->getMessage();
-			return false;
+			return (object) [
+				'success' => false,
+				'message' => $e->getMessage()
+			];
 		}
 	}
 	
@@ -86,16 +94,16 @@ class TogglApi {
 		at: timestamp that is sent in the response, indicates the time client was last updated
 	*/
 	
-	public function createClient($args){
-		return $this->POST('clients', ['client' => $args]);
+	public function createClient($client){
+		return $this->POST('clients', ['client' => $client]);
 	}
 	
-	public function updateClient($clientId, $args){
-		return $this->PUT('clients/'.$clientId, ['client' => $args]);
+	public function updateClient($clientId, $client){
+		return $this->PUT('clients/' . $clientId, ['client' => $client]);
 	}
 	
 	public function deleteClient($clientId){
-		return $this->DELETE('clients/'.$clientId);
+		return $this->DELETE('clients/' . $clientId);
 	}
 	
 	public function getClients(){
@@ -103,23 +111,23 @@ class TogglApi {
 	}
 	
 	public function getClientProjects($clientId){
-		return $this->GET('clients/'.$clientId.'/projects');
+		return $this->GET('clients/' . $clientId . '/projects');
 	}
 	
 	public function getActiveClientProjects($clientId){
-		return $this->GET('clients/'.$clientId.'/projects?active=true');
+		return $this->GET('clients/' . $clientId . '/projects?active=true');
 	}
 	
 	public function getInactiveClientProjects($clientId){
-		return $this->GET('clients/'.$clientId.'/projects?active=false');
+		return $this->GET('clients/' . $clientId . '/projects?active=false');
 	}
 	
 	public function getAllClientProjects($clientId){
-		return $this->GET('clients/'.$clientId.'/projects?active=both');
+		return $this->GET('clients/' . $clientId . '/projects?active=both');
 	}
 	
 	public function getClientById($clientId){
-		return $this->GET('clients/'.$clientId);
+		return $this->GET('clients/' . $clientId);
 	}
 	
 	/* 	PROJECTS USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md)
@@ -136,28 +144,28 @@ class TogglApi {
 
 	*/
 	
-	public function createProjectUser($args){
-		return $this->POST('project_users', ['project_user' => $args]);
+	public function createProjectUser($user){
+		return $this->POST('project_users', ['project_user' => $user]);
 	}
 	
-	public function createProjectUsers($args){
-		return $this->POST('project_users', ['project_user' => $args]);
+	public function createProjectUsers($user){
+		return $this->POST('project_users', ['project_user' => $user]);
 	}
 	
-	public function updateProjectUser($projectUserId, $args){
-		return $this->PUT('project_users/'.$projectUserId, ['project_user' => $args]);
+	public function updateProjectUser($projectUserId, $user){
+		return $this->PUT('project_users/' . $projectUserId, ['project_user' => $user]);
 	}
 	
-	public function updateProjectUsers($projectUserIds, $args){
-		return $this->PUT('project_users/'.implode(',', $projectUserIds), ['project_user' => $args]);
+	public function updateProjectUsers($projectUserIds, $user){
+		return $this->PUT('project_users/' . implode(',', $projectUserIds), ['project_user' => $user]);
 	}
 	
 	public function deleteProjectUser($projectUserId){
-		return $this->DELETE('project_users/'.$projectUserId);
+		return $this->DELETE('project_users/' . $projectUserId);
 	}
 	
 	public function deleteProjectUsers($projectUserIds){
-		return $this->DELETE('project_users/'.implode(',', $projectUserIds));
+		return $this->DELETE('project_users/' . implode(',', $projectUserIds));
 	}
 	
 	/* 	PROJECTS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md)
@@ -181,32 +189,32 @@ class TogglApi {
 
 	*/
 	
-	public function createProject($args){
-		return $this->POST('projects', ['project' => $args]);
+	public function createProject($project){
+		return $this->POST('projects', ['project' => $project]);
 	}
 	
-	public function updateProject($projectId, $args){
-		return $this->PUT('projects/'.$projectId, ['project' => $args]);
+	public function updateProject($projectId, $project){
+		return $this->PUT('projects/' . $projectId, ['project' => $project]);
 	}
 	
 	public function deleteProject($projectId){
-		return $this->DELETE('projects/'.$projectId);
+		return $this->DELETE('projects/' . $projectId);
 	}
 	
 	public function deleteProjects($projectIds){
-		return $this->DELETE('projects/'.implode(',', $projectIds));
+		return $this->DELETE('projects/' . implode(',', $projectIds));
 	}
 	
 	public function getProjectUserRelations($projectId, $active = 'true'){
-		return $this->GET('projects/'.$projectId.'/project_users');
+		return $this->GET('projects/' . $projectId . '/project_users');
 	}
 	
 	public function getProjectTasks($projectId, $active = 'true'){
-		return $this->GET('projects/'.$projectId.'/tasks');
+		return $this->GET('projects/' . $projectId . '/tasks');
 	}
 
 	public function getProject($projectId){
-		return $this->GET('projects/'.$projectId);
+		return $this->GET('projects/' . $projectId);
 	}
 	
 	/* 	DASHBOARD (https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md)
@@ -230,7 +238,7 @@ class TogglApi {
 	*/
 	
 	public function getDashboadForWorkspace($workspaceId){
-		return $this->GET('dashboard/'.$workspaceId);
+		return $this->GET('dashboard/' . $workspaceId);
 	}
 	
 	/* 	USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/users.md)
@@ -259,16 +267,16 @@ class TogglApi {
 
 	*/	
 	
-	public function getMe(){
-		return $this->GET('me');
+	public function getMe($related = false){
+		return $this->GET('me', [], ['with_related_data' => $related]);
 	}
 	
-	public function updateMe($args){
-		return $this->PUT('me', ['user' => $args]);
+	public function updateMe($user){
+		return $this->PUT('me', ['user' => $user]);
 	}
 	
-	public function signup($args){
-		return $this->POST('signups', ['user' => $args]);
+	public function signup($user){
+		return $this->POST('signups', ['user' => $user]);
 	}
 	
 	public function resetApiToken(){
@@ -297,31 +305,31 @@ class TogglApi {
 	}
 	
 	public function getWorkspace($wid){
-		return $this->GET('workspaces/'.$wid);
+		return $this->GET('workspaces/' . $wid);
 	}
 	
-	public function updateWorkspace($wid, $args){
-		return $this->PUT('workspaces/'.$wid, ['workspace' => $args]);
+	public function updateWorkspace($wid, $workspace){
+		return $this->PUT('workspaces/' . $wid, ['workspace' => $workspace]);
 	}
 	
 	public function getWorkspaceUsers($wid){
-		return $this->GET('workspaces/'.$wid.'/users');
+		return $this->GET('workspaces/' . $wid . '/users');
 	}
 	
 	public function getWorkspaceClients($wid){
-		return $this->GET('workspaces/'.$wid.'/clients');
+		return $this->GET('workspaces/' . $wid . '/clients');
 	}
 	
 	public function getWorkspaceProjects($wid){
-		return $this->GET('workspaces/'.$wid.'/projects');
+		return $this->GET('workspaces/' . $wid . '/projects');
 	}
 	
 	public function getWorkspaceTasks($wid){
-		return $this->GET('workspaces/'.$wid.'/tasks');
+		return $this->GET('workspaces/' . $wid . '/tasks');
 	}
 	
 	public function getWorkspaceTags($wid){
-		return $this->GET('workspaces/'.$wid.'/tags');
+		return $this->GET('workspaces/' . $wid . '/tags');
 	}
 	
 	/* 	WORKSPACE USERS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspace_users.md)
@@ -334,20 +342,20 @@ class TogglApi {
 		invite_url: if user has not accepted the invitation the url for accepting his/her invitation is sent when the request is made by workspace_admin
 	*/
 	
-	public function inviteUsersToWorkspace($wid, $args){
-		return $this->POST('workspaces/'.$wid.'/invite', ['emails' => $args]);
+	public function inviteUsersToWorkspace($wid, $emails){
+		return $this->POST('workspaces/' . $wid . '/invite', ['emails' => $emails]);
 	}
 	
-	public function updateWorkspaceUser($workspaceUserId, $args){
-		return $this->PUT('workspace_users/'.$workspaceUserId, ['workspace_user' => $args]);
+	public function updateWorkspaceUser($workspaceUserId, $user){
+		return $this->PUT('workspace_users/' . $workspaceUserId, ['workspace_user' => $user]);
 	}
 	
 	public function deleteWorkspaceUser($workspaceUserId){
-		return $this->DELETE('workspace_users/'.$workspaceUserId);	
+		return $this->DELETE('workspace_users/' . $workspaceUserId);	
 	}
 	
 	public function getWorkspaceUserRelations($wid){
-		return $this->GET('workspaces/'.$wid.'/workspace_users');
+		return $this->GET('workspaces/' . $wid . '/workspace_users');
 	}
 	
 	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
@@ -358,16 +366,16 @@ class TogglApi {
 		wid: workspace ID, where the tag will be used (integer, required)
 	*/
 	
-	public function createTag($args){
-		return $this->POST('tags', ['tag' => $args]);
+	public function createTag($tag){
+		return $this->POST('tags', ['tag' => $tag]);
 	}
 	
-	public function updateTag($tagid, $args){
-		return $this->PUT('tags/'.$tagid, ['tag' => $args]);
+	public function updateTag($tagId, $tag){
+		return $this->PUT('tags/' . $tagId, ['tag' => $tag]);
 	}
 	
-	public function deleteTag($tagid){
-		return $this->DELETE('tags/'.$tagid);
+	public function deleteTag($tagId){
+		return $this->DELETE('tags/' . $tagId);
 	}
 	
 	/* 	TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md) 
@@ -387,28 +395,28 @@ class TogglApi {
 		Workspace id (wid) and project id (pid) can't be changed on update.
 	*/
 	
-	public function getTask($taskid){
-		return $this->GET('tasks/'.$taskid);
+	public function getTask($taskId){
+		return $this->GET('tasks/' . $taskId);
 	}
 	
-	public function createTask($args){
-		return $this->POST('tasks', ['task' => $args]);
+	public function createTask($task){
+		return $this->POST('tasks', ['task' => $task]);
 	}
 	
-	public function updateTask($taskid, $args){
-		return $this->PUT('tasks/'.$taskid, ['task' => $args]);
+	public function updateTask($taskId, $task){
+		return $this->PUT('tasks/' . $taskId, ['task' => $task]);
 	}
 	
-	public function updateTasks($taskids, $args){
-		return $this->PUT('tasks/'.implode(',', $taskids), ['task' => $args]);
+	public function updateTasks($taskIds, $task){
+		return $this->PUT('tasks/' . implode(',', $taskIds), ['task' => $task]);
 	}
 	
-	public function deleteTask($taskid){
-		return $this->DELETE('tasks/'.$taskid);
+	public function deleteTask($taskId){
+		return $this->DELETE('tasks/' . $taskId);
 	}
 	
-	public function deleteTasks($taskids){
-		return $this->DELETE('tasks/'.implode(',', $taskids));
+	public function deleteTasks($taskIds){
+		return $this->DELETE('tasks/' . implode(',', $taskIds));
 	}
 	
 	/* 	TIME ENTRIES (https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md)
@@ -431,20 +439,20 @@ class TogglApi {
 		at: timestamp that is sent in the response, indicates the time item was last updated
 	*/
 	
-	public function createTimeEntry($args){
-		return $this->POST('time_entries', ['time_entry' => $args]);
+	public function createTimeEntry($entry){
+		return $this->POST('time_entries', ['time_entry' => $entry]);
 	}	
 	
 	public function startTimeEntry($args){
-		return $this->POST('time_entries/start', ['time_entry' => $args]);
+		return $this->POST('time_entries/start', ['time_entry' => $entry]);
 	}	
 	
 	public function stopTimeEntry($timeEntryId){
-		return $this->PUT('time_entries/'.$timeEntryId.'/stop');
+		return $this->PUT('time_entries/' . $timeEntryId.'/stop');
 	}
 	
 	public function getTimeEntry($timeEntryId){
-		return $this->GET('time_entries/'.$timeEntryId);
+		return $this->GET('time_entries/' . $timeEntryId);
 	}	
 	
 	public function getRunningTimeEntry(){
@@ -456,19 +464,19 @@ class TogglApi {
 	}	
 	
 	public function getTimeEntriesInRange($start, $end){
-		return $this->GET('time_entries?start_date='.urlencode($start).'&end_date='.urlencode($end));
+		return $this->GET('time_entries', [], ['start_date' => $start, 'end_date' => $end]);
 	}	
 	
-	public function updateTagsForTimeEntries($timeEntryIds, $args){
-		return $this->PUT('time_entries/'.implode(',', $timeEntryIds), ['time_entry' => $args]);
+	public function updateTagsForTimeEntries($timeEntryIds, $entry){
+		return $this->PUT('time_entries/' . implode(',', $timeEntryIds), ['time_entry' => $args]);
 	}
 	
-	public function updateTimeEntry($timeEntryId, $args){
-		return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $args]);
+	public function updateTimeEntry($timeEntryId, $entry){
+		return $this->PUT('time_entries/' . $timeEntryId, ['time_entry' => $args]);
 	}	
 	
 	public function deleteTimeEntry($timeEntryId){
-		return $this->DELETE('time_entries/'.$timeEntryId);
+		return $this->DELETE('time_entries/' . $timeEntryId);
 	}	
 	
 }
