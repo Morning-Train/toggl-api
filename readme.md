@@ -181,6 +181,209 @@ $toggl->getProjectTasks($projectId);
 $toggl->getProject($projectId);
 ```
 
+### Dashboard
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md
+
+#### Get dashboard for workspace
+
+```
+$toggl->getDashboardForWorkspace($workspaceId);
+```
+
+### Users
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/users.md
+
+#### Get me
+$related defaults to false. Set it to true, to get related data
+```
+$toggl->getMe($related);
+```
+
+#### Update me
+```
+$toggl->updateMe($userObject);
+```
+
+#### Sign up
+```
+$toggl->signup($userObject);
+```
+
+#### Reset API Token
+```
+$toggl->resetApiToken();
+```
+
+### Workspaces
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md
+
+#### Get workspaces
+```
+$toggl->getWorkspaces();
+```
+
+#### Get workspace by ID
+```
+$toggl->getWorkspace($workspaceId);
+```
+
+#### Update workspace
+```
+$toggl->updateWorkspace($workspaceId, $workspaceObject);
+```
+
+#### Get workspace users
+```
+$toggl->getWorkspaceUsers($workspaceId);
+```
+
+#### Get workspace clients
+```
+$toggl->getWorkspaceClients($workspaceId);
+```
+
+#### Get workspace projects
+```
+$toggl->getWorkspaceProjects($workspaceId);
+```
+
+#### Get workspace tasks
+```
+$toggl->getWorkspaceTasks($workspaceId);
+```
+
+#### Get workspace tags
+```
+$toggl->getWorkspaceTags($workspaceId);
+```
+
+### Workspace users
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspace_users.md
+
+#### Invite users to workspace
+```
+$toggl->inviteUsersToWorkspace($workspaceId, $emails);
+```
+
+#### Update workspace user
+```
+$toggl->updateWorkspaceUser($workspaceUserId, $userObject);
+```
+
+#### Delete workspace user
+```
+$toggl->deleteWorkspaceUser($workspaceUserId);
+```
+
+#### Get workspace users for workspace
+```
+$toggl->getWorkspaceUserRelations($workspaceId);
+```
+
+### Tags
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md
+
+#### Create tag
+```
+$toggl->createTag($tagObject);
+```
+
+#### Update tag
+```
+$toggl->updateTag($tagId, $tagObject);
+```
+
+#### Delete tag
+```
+$toggl->deleteTag($tagId);
+```
+
+### Tasks
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md
+
+#### Get task
+```
+$toggl->getTask($taskId);
+```
+
+#### Create task
+```
+$toggl->createTask($taskObject);
+```
+
+#### Update task
+```
+$toggl->updateTask($taskId, $taskObject);
+```
+
+#### Update tasks
+```
+$toggl->updateTasks($taskId, $taskObject);
+```
+
+#### Delete task
+```
+$toggl->deleteTask($taskId);
+```
+
+#### Delete tasks
+```
+$toggl->deleteTasks($taskIds);
+```
+
+### Time entries
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md
+
+#### Create time entry
+```
+$toggl->createTimeEntry($timeEntryObject);
+```
+
+#### Start time entry
+```
+$toggl->startTimeEntry($timeEntryObject);
+```
+
+#### Stop time entry
+```
+$toggl->stopTimeEntry($timeEntryIds);
+```
+
+#### Get time entry
+```
+$toggl->getTimeEntry($timeEntryIds);
+```
+
+#### Get running time entry
+```
+$toggl->getRunningTimeEntry();
+```
+
+#### Get time entries
+```
+$toggl->getTimeEntries();
+```
+
+#### Get time entries in range
+```
+$toggl->getTimeEntriesInRange($start, $end);
+```
+
+#### Update tags for time entries
+```
+$toggl->updateTagsForTimeEntries($timeEntryIds, $timeEntryObject);
+```
+
+#### Update time entry
+```
+$toggl->updateTimeEntry($timeEntryIds, $timeEntryObject);
+```
+
+#### Delete time entry
+```
+$toggl->deleteTimeEntry($timeEntryIds);
+```
+
 ## Reports API
 
 ### Initialization
