@@ -114,19 +114,19 @@ class TogglReportsApi {
 	}
 	
 	public function getProjectReport($query){
-		return $this->get('project', $query));
+		return $this->get('project', $query);
 	}
 	
 	public function getSummaryReport($query){
-		return $this->get('summary', $query));
+		return $this->get('summary', $query);
 	}
 	
 	public function getDetailsReport($query){
-		return $this->get('details', $query));
+		return $this->get('details', $query);
 	}
 	
 	public function getWeeklyReport($query){
-		return $this->get('weekly', $query));
+		return $this->get('weekly', $query);
 	}
 	
 	

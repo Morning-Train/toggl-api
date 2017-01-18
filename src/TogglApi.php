@@ -443,7 +443,7 @@ class TogglApi {
 		return $this->POST('time_entries', ['time_entry' => $entry]);
 	}	
 	
-	public function startTimeEntry($args){
+	public function startTimeEntry($entry){
 		return $this->POST('time_entries/start', ['time_entry' => $entry]);
 	}	
 	
@@ -468,11 +468,11 @@ class TogglApi {
 	}	
 	
 	public function updateTagsForTimeEntries($timeEntryIds, $entry){
-		return $this->PUT('time_entries/' . implode(',', $timeEntryIds), ['time_entry' => $args]);
+		return $this->PUT('time_entries/' . implode(',', $timeEntryIds), ['time_entry' => $entry]);
 	}
 	
 	public function updateTimeEntry($timeEntryId, $entry){
-		return $this->PUT('time_entries/' . $timeEntryId, ['time_entry' => $args]);
+		return $this->PUT('time_entries/' . $timeEntryId, ['time_entry' => $entry]);
 	}	
 	
 	public function deleteTimeEntry($timeEntryId){
