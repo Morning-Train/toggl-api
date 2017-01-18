@@ -25,120 +25,165 @@ Guzzle can be added with the following composer snippet:
 }
 ```
 
-#Examples
+# Examples
 
 For details about the different objects required in the Toggl Api, take a look at their documentation:
 https://github.com/toggl/toggl_api_docs
 
-##Toggl API
+## Toggl API
 
-###Initialization
+### Initialization
 
 ```
 $toggl = new MorningTrain\TogglApi\TogglApi('my-api-token');
 ```
 
-###Clients
+### Clients
 
 https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
 
-####Creating a client
+#### Creating a client
 
 ```
 $toggl->createClient($clientObject);
 ```
 
-####Updating a client
+#### Updating a client
 
 ```
 $toggl->updateClient($clientId, $clientObject);
 ```
 
-####Deleting a client
+#### Deleting a client
 
 ```
 $toggl->deleteClient($clientId);
 ```
 
-####Get all clients
+#### Get all clients
 
 ```
 $toggl->getClients();
 ```
 
-####Get all projects for a client
+#### Get all projects for a client
 
 ```
 $toggl->getClientProjects($clientId);
 ```
 
-####Get all active projects for a client
+#### Get all active projects for a client
 
 ```
 $toggl->getActiveClientProjects($clientId);
 ```
 
-####Get all inactive projects for a client
+#### Get all inactive projects for a client
 
 ```
 $toggl->getInactiveClientProjects($clientId);
 ```
 
-####Get both active and inactive projects for a client
+#### Get both active and inactive projects for a client
 
 ```
 $toggl->getAllClientProjects($clientId);
 ```
 
-####Get client by id
+#### Get client by id
 
 ```
 $toggl->getClientById($clientId);
 ```
 
-###Project users
+### Project users
 
 https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
 
-####Create project user
+#### Create project user
 
 ```
 $toggl->createProjectUser($projectUserObject);
 ```
 
-####Create project users
+#### Create project users
 
 ```
 $toggl->createProjectUsers($projectUserObject);
 ```
 
-####Update project user
+#### Update project user
 
 ```
 $toggl->updateProjectUser($projectUserId, $projectUserObject);
 ```
 
-####Update project users
+#### Update project users
 
 ```
 $toggl->updateProjectUsers($projectUserIds, $projectUserObject);
 ```
 
-####Create project users
+#### Create project users
 
 ```
 $toggl->deleteProjectUser($projectUserId);
 ```
 
-####Create project users
+#### Create project users
 
 ```
 $toggl->deleteProjectUsers($projectUserIds);
 ```
 
-##Reports API
+### Projects
+https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md
 
-###Initialization
+#### Create project
+
+```
+$toggl->createProject($projectObject);
+```
+
+#### Update project
+
+```
+$toggl->updateProject($projectId, $projectObject);
+```
+
+#### Delete project
+
+```
+$toggl->deleteProject($projectId);
+```
+
+#### Delete projects
+
+```
+$toggl->deleteProjects($projectIds);
+```
+
+#### Get users for project
+
+```
+$toggl->getProjectUserRelations($projectId);
+```
+
+#### Get project tasks
+
+```
+$toggl->getProjectTasks($projectId);
+```
+
+#### Get project by ID
+
+```
+$toggl->getProject($projectId);
+```
+
+## Reports API
+
+### Initialization
 
 ```
 $toggl = new MorningTrain\TogglApi\TogglReportsApi('my-api-token');
