@@ -36,102 +36,108 @@ use GuzzleHttp\Exception\ClientException;
 
 */
 
-class TogglReportsApi {
-	
-	protected $api_token = '';
-	
-	protected $client;
-	
-	public function __construct($api_token) {
-		$this->api_token = $api_token;
-		$this->client = new Client([
-			'base_uri' => 'https://www.toggl.com/reports/api/v2/',
-			'auth' => [$this->api_token, 'api_token']
-		]);		
-	}
-	
-	private function GET($endpoint, $query = array()){		
-		try {
-			$response = $this->client->get($endpoint, ['query' => $query]);
-			return $this->checkResponse($response);
-		} catch (ClientException $e) {
-			return (object) [
-				'success' => false,
-				'message' => $e->getMessage()
-			];
-		}
-	}
-	
-	private function POST($endpoint, $query = array()){		
-		try {
-			$response = $this->client->post($endpoint, ['query' => $query]);
-			return $this->checkResponse($response);
-		} catch (ClientException $e) {
-			return (object) [
-				'success' => false,
-				'message' => $e->getMessage()
-			];
-		}
-	}
-	
-	private function PUT($endpoint, $query = array()){		
-		try {
-			$response = $this->client->put($endpoint, ['query' => $query]);
-			return $this->checkResponse($response);
-		} catch (ClientException $e) {
-			return (object) [
-				'success' => false,
-				'message' => $e->getMessage()
-			];
-		}
-	}
-	
-	private function DELETE($endpoint, $query = array()){		
-		try {
-			$response = $this->client->delete($endpoint, ['query' => $query]);
-			return $this->checkResponse($response);
-		} catch (ClientException $e) {
-			return (object) [
-				'success' => false,
-				'message' => $e->getMessage()
-			];
-		}
-	}
-	
-	private function checkResponse($response) {
-		if($response->getStatusCode() == 200) {
-			$data = json_decode($response->getBody());
-			if(is_object($data) && isset($data->data)){
-				$data = $data->data;
-			}
-			return $data;
-		}
-		return false;
-	}
-	
-	public function getAvailableEndpoints(){
-		return $this->get('');
-	}
-	
-	public function getProjectReport($query){
-		return $this->get('project', $query);
-	}
-	
-	public function getSummaryReport($query){
-		return $this->get('summary', $query);
-	}
-	
-	public function getDetailsReport($query){
-		return $this->get('details', $query);
-	}
-	
-	public function getWeeklyReport($query){
-		return $this->get('weekly', $query);
-	}
-	
-	
-	
-	
+class TogglReportsApi
+{
+    
+    protected $api_token = '';
+    
+    protected $client;
+    
+    public function __construct($api_token)
+    {
+        $this->api_token = $api_token;
+        $this->client = new Client([
+            'base_uri' => 'https://www.toggl.com/reports/api/v2/',
+            'auth' => [$this->api_token, 'api_token']
+        ]);
+    }
+    
+    private function GET($endpoint, $query = array())
+    {
+        try {
+            $response = $this->client->get($endpoint, ['query' => $query]);
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+    
+    private function POST($endpoint, $query = array())
+    {
+        try {
+            $response = $this->client->post($endpoint, ['query' => $query]);
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+    
+    private function PUT($endpoint, $query = array())
+    {
+        try {
+            $response = $this->client->put($endpoint, ['query' => $query]);
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+    
+    private function DELETE($endpoint, $query = array())
+    {
+        try {
+            $response = $this->client->delete($endpoint, ['query' => $query]);
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage()
+            ];
+        }
+    }
+    
+    private function checkResponse($response)
+    {
+        if ($response->getStatusCode() == 200) {
+            $data = json_decode($response->getBody());
+            if (is_object($data) && isset($data->data)) {
+                $data = $data->data;
+            }
+            return $data;
+        }
+        return false;
+    }
+    
+    public function getAvailableEndpoints()
+    {
+        return $this->get('');
+    }
+    
+    public function getProjectReport($query)
+    {
+        return $this->get('project', $query);
+    }
+    
+    public function getSummaryReport($query)
+    {
+        return $this->get('summary', $query);
+    }
+    
+    public function getDetailsReport($query)
+    {
+        return $this->get('details', $query);
+    }
+    
+    public function getWeeklyReport($query)
+    {
+        return $this->get('weekly', $query);
+    }
 }
-
-?>
