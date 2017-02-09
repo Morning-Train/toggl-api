@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\ClientException;
 
 /*
 	https://github.com/toggl/toggl_api_docs/blob/master/reports.md
-	
+
 	The API expects the request parameters as the query string of the URL.
 
 	The following parameters and filters can be used in all of the reports
@@ -38,20 +38,20 @@ use GuzzleHttp\Exception\ClientException;
 
 class TogglReportsApi
 {
-    
-    protected $api_token = '';
-    
+
+    protected $apiToken = '';
+
     protected $client;
-    
-    public function __construct($api_token)
+
+    public function __construct($apiToken)
     {
-        $this->api_token = $api_token;
+        $this->apiToken = $apiToken;
         $this->client = new Client([
             'base_uri' => 'https://www.toggl.com/reports/api/v2/',
-            'auth' => [$this->api_token, 'api_token']
+            'auth' => [$this->apiToken, 'api_token'],
         ]);
     }
-    
+
     private function GET($endpoint, $query = array())
     {
         try {
@@ -60,11 +60,11 @@ class TogglReportsApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
-    
+
     private function POST($endpoint, $query = array())
     {
         try {
@@ -73,11 +73,11 @@ class TogglReportsApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
-    
+
     private function PUT($endpoint, $query = array())
     {
         try {
@@ -86,11 +86,11 @@ class TogglReportsApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
-    
+
     private function DELETE($endpoint, $query = array())
     {
         try {
@@ -99,11 +99,11 @@ class TogglReportsApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
-    
+
     private function checkResponse($response)
     {
         if ($response->getStatusCode() == 200) {
@@ -115,27 +115,27 @@ class TogglReportsApi
         }
         return false;
     }
-    
+
     public function getAvailableEndpoints()
     {
         return $this->get('');
     }
-    
+
     public function getProjectReport($query)
     {
         return $this->get('project', $query);
     }
-    
+
     public function getSummaryReport($query)
     {
         return $this->get('summary', $query);
     }
-    
+
     public function getDetailsReport($query)
     {
         return $this->get('details', $query);
     }
-    
+
     public function getWeeklyReport($query)
     {
         return $this->get('weekly', $query);

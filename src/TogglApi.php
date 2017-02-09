@@ -5,19 +5,23 @@ namespace MorningTrain\TogglApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
+/**
+ * Class TogglApi
+ *
+ * @package MorningTrain\TogglApi
+ */
 class TogglApi
 {
-
-    protected $api_token = '';
+    protected $apiToken = '';
 
     protected $client;
 
-    public function __construct($api_token)
+    public function __construct($apiToken)
     {
-        $this->api_token = $api_token;
+        $this->apiToken = $apiToken;
         $this->client = new Client([
             'base_uri' => 'https://www.toggl.com/api/v8/',
-            'auth' => [$this->api_token, 'api_token']
+            'auth' => [$this->apiToken, 'api_token'],
         ]);
     }
 
@@ -25,11 +29,12 @@ class TogglApi
     {
         try {
             $response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
@@ -38,11 +43,12 @@ class TogglApi
     {
         try {
             $response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
@@ -51,11 +57,12 @@ class TogglApi
     {
         try {
             $response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
@@ -64,11 +71,12 @@ class TogglApi
     {
         try {
             $response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage()
+                'message' => $e->getMessage(),
             ];
         }
     }
@@ -80,8 +88,10 @@ class TogglApi
             if (is_object($data) && isset($data->data)) {
                 $data = $data->data;
             }
+
             return $data;
         }
+
         return false;
     }
 
