@@ -5,44 +5,29 @@ namespace MorningTrain\TogglApi;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
-/*
-	https://github.com/toggl/toggl_api_docs/blob/master/reports.md
-
-	The API expects the request parameters as the query string of the URL.
-
-	The following parameters and filters can be used in all of the reports
-
-	user_agent: string, required, the name of your application or your email address so we can get in touch in case you're doing something wrong.
-	workspace_id: integer, required. The workspace whose data you want to access.
-	since: string, ISO 8601 date (YYYY-MM-DD), by default until - 6 days.
-	until: string, ISO 8601 date (YYYY-MM-DD), by default today
-	billable: possible values: yes/no/both, default both
-	client_ids: client ids separated by a comma, 0 if you want to filter out time entries without a client
-	project_ids: project ids separated by a comma, 0 if you want to filter out time entries without a project
-	user_ids: user ids separated by a comma
-	tag_ids: tag ids separated by a comma, 0 if you want to filter out time entries without a tag
-	task_ids: task ids separated by a comma, 0 if you want to filter out time entries without a task
-	time_entry_ids: time entry ids separated by a comma
-	description: string, time entry description
-	without_description: true/false, filters out the time entries which do not have a description ('(no description)')
-	order_field:
-	date/description/duration/user in detailed reports
-	title/duration/amount in summary reports
-	title/day1/day2/day3/day4/day5/day6/day7/week_total in weekly report
-	order_desc: on/off, on for descending and off for ascending order
-	distinct_rates: on/off, default off
-	rounding: on/off, default off, rounds time according to workspace settings
-	display_hours: decimal/minutes, display hours with minutes or as a decimal number, default minutes
-
-*/
-
+/**
+ * Wrapper for the Toggl Reports Api.
+ *
+ * @see https://github.com/toggl/toggl_api_docs/blob/master/reports.md
+ */
 class TogglReportsApi
 {
 
+    /**
+     * @var string
+     */
     protected $apiToken = '';
 
+    /**
+     * @var \GuzzleHttp\Client
+     */
     protected $client;
 
+    /**
+     * TogglReportsApi constructor.
+     *
+     * @param string $apiToken
+     */
     public function __construct($apiToken)
     {
         $this->apiToken = $apiToken;
@@ -52,10 +37,19 @@ class TogglReportsApi
         ]);
     }
 
+    /**
+     * Helper for client get command.
+     *
+     * @param string $endpoint
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
     private function GET($endpoint, $query = array())
     {
         try {
             $response = $this->client->get($endpoint, ['query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
@@ -65,10 +59,19 @@ class TogglReportsApi
         }
     }
 
+    /**
+     * Helper for client post command.
+     *
+     * @param string $endpoint
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
     private function POST($endpoint, $query = array())
     {
         try {
             $response = $this->client->post($endpoint, ['query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
@@ -78,10 +81,19 @@ class TogglReportsApi
         }
     }
 
+    /**
+     * Helper for client put command.
+     *
+     * @param string $endpoint
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
     private function PUT($endpoint, $query = array())
     {
         try {
             $response = $this->client->put($endpoint, ['query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
@@ -91,10 +103,19 @@ class TogglReportsApi
         }
     }
 
+    /**
+     * Helper for client delete command.
+     *
+     * @param string $endpoint
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
     private function DELETE($endpoint, $query = array())
     {
         try {
             $response = $this->client->delete($endpoint, ['query' => $query]);
+
             return $this->checkResponse($response);
         } catch (ClientException $e) {
             return (object) [
@@ -104,6 +125,13 @@ class TogglReportsApi
         }
     }
 
+    /**
+     * Helper for checking http response.
+     *
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
+     * @return bool|mixed
+     */
     private function checkResponse($response)
     {
         if ($response->getStatusCode() == 200) {
@@ -111,31 +139,66 @@ class TogglReportsApi
             if (is_object($data) && isset($data->data)) {
                 $data = $data->data;
             }
+
             return $data;
         }
+
         return false;
     }
 
+    /**
+     * Get available endpoints.
+     *
+     * @return bool|mixed|object
+     */
     public function getAvailableEndpoints()
     {
         return $this->get('');
     }
 
+    /**
+     * Get project report.
+     *
+     * @param string $query
+     *
+     * @return bool|mixed|object
+     */
     public function getProjectReport($query)
     {
         return $this->get('project', $query);
     }
 
+    /**
+     * Get summary report.
+     *
+     * @param string $query
+     *
+     * @return bool|mixed|object
+     */
     public function getSummaryReport($query)
     {
         return $this->get('summary', $query);
     }
 
+    /**
+     * Get details report.
+     *
+     * @param string $query
+     *
+     * @return bool|mixed|object
+     */
     public function getDetailsReport($query)
     {
         return $this->get('details', $query);
     }
 
+    /**
+     * Get weekly report.
+     *
+     * @param string $query
+     *
+     * @return bool|mixed|object
+     */
     public function getWeeklyReport($query)
     {
         return $this->get('weekly', $query);
