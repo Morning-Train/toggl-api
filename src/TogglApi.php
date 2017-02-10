@@ -37,119 +37,6 @@ class TogglApi
     }
 
     /**
-     * Helper for client get command.
-     *
-     * @param string $endpoint
-     * @param array $body
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function GET($endpoint, $body = array(), $query = array())
-    {
-        try {
-            $response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Wrapper for client post command.
-     *
-     * @param string $endpoint
-     * @param array $body
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function POST($endpoint, $body = array(), $query = array())
-    {
-        try {
-            $response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for client put command.
-     *
-     * @param string $endpoint
-     * @param array $body
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function PUT($endpoint, $body = array(), $query = array())
-    {
-        try {
-            $response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for client delete command.
-     *
-     * @param $endpoint
-     * @param array $body
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function DELETE($endpoint, $body = array(), $query = array())
-    {
-        try {
-            $response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for checking http response.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return bool|mixed
-     */
-    private function checkResponse($response)
-    {
-        if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody());
-            if (is_object($data) && isset($data->data)) {
-                $data = $data->data;
-            }
-
-            return $data;
-        }
-
-        return false;
-    }
-
-    /**
      * Get available endpoints.
      *
      * @return bool|mixed|object
@@ -1018,5 +905,118 @@ class TogglApi
     public function deleteTimeEntry($timeEntryId)
     {
         return $this->DELETE('time_entries/'.$timeEntryId);
+    }
+
+    /**
+     * Helper for client get command.
+     *
+     * @param string $endpoint
+     * @param array $body
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
+    private function GET($endpoint, $body = array(), $query = array())
+    {
+        try {
+            $response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Wrapper for client post command.
+     *
+     * @param string $endpoint
+     * @param array $body
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
+    private function POST($endpoint, $body = array(), $query = array())
+    {
+        try {
+            $response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Helper for client put command.
+     *
+     * @param string $endpoint
+     * @param array $body
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
+    private function PUT($endpoint, $body = array(), $query = array())
+    {
+        try {
+            $response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Helper for client delete command.
+     *
+     * @param $endpoint
+     * @param array $body
+     * @param array $query
+     *
+     * @return bool|mixed|object
+     */
+    private function DELETE($endpoint, $body = array(), $query = array())
+    {
+        try {
+            $response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
+
+            return $this->checkResponse($response);
+        } catch (ClientException $e) {
+            return (object) [
+                'success' => false,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Helper for checking http response.
+     *
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *
+     * @return bool|mixed
+     */
+    private function checkResponse($response)
+    {
+        if ($response->getStatusCode() == 200) {
+            $data = json_decode($response->getBody());
+            if (is_object($data) && isset($data->data)) {
+                $data = $data->data;
+            }
+
+            return $data;
+        }
+
+        return false;
     }
 }
