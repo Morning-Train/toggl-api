@@ -5,7 +5,9 @@ PHP class to connect with the Toggl API.
 This was coded on an early http://morningtrain.dk
 
 #Installation
+
 It can be installed with composer
+
 ```
 composer require morningtrain/toggl-api
 ```
@@ -426,5 +428,3 @@ $toggl->getDetailsReport($query);
 ```
 $toggl->getWeeklyReport($query);
 ```
-
-
