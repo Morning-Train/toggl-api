@@ -267,7 +267,7 @@ class TogglApi
 		duration: Sum of time entry durations that have been created during last 7 days
 	*/
 
-    public function getDashboadForWorkspace($workspaceId)
+    public function getDashboardForWorkspace($workspaceId)
     {
         return $this->GET('dashboard/'.$workspaceId);
     }
