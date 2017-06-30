@@ -27,6 +27,10 @@ Guzzle can be added with the following composer snippet:
 }
 ```
 
+# Changelog
+## 30/06/17 
+- Changed function name from getDashboadForWorkspace to getDashboardForWorkspace, if your system is using getDashboadForWorkspace please change it to getDashboardForWorkspace.
+
 # Examples
 
 For details about the different objects required in the Toggl Api, take a look at their documentation:
