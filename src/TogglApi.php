@@ -383,7 +383,8 @@ class TogglApi
      *
      * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/dashboard.md)
      */
-    public function getDashboadForWorkspace($workspaceId)
+  
+    public function getDashboardForWorkspace($workspaceId)
     {
         return $this->GET('dashboard/'.$workspaceId);
     }

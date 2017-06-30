@@ -428,5 +428,3 @@ $toggl->getDetailsReport($query);
 ```
 $toggl->getWeeklyReport($query);
 ```
-
-
