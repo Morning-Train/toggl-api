@@ -535,7 +535,7 @@ class TogglApi
      * Get workspace projects.
      *
      * @param int   $wid
-     * @param array   $options
+     * @param array $options
      *
      * @return bool|mixed|object
      */
