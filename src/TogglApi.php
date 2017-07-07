@@ -547,7 +547,7 @@ class TogglApi
     /**
      * Get workspace tasks.
      *
-     * @param int $wid
+     * @param int   $wid
      * @param array $options
      *
      * @return bool|mixed|object
