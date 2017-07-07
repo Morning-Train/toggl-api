@@ -548,12 +548,13 @@ class TogglApi
      * Get workspace tasks.
      *
      * @param int $wid
+     * @param array $options
      *
      * @return bool|mixed|object
      */
-    public function getWorkspaceTasks($wid)
+    public function getWorkspaceTasks($wid, $options = [])
     {
-        return $this->GET('workspaces/'.$wid.'/tasks');
+        return $this->GET('workspaces/'.$wid.'/tasks', $options);
     }
 
     /**
