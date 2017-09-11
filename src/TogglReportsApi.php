@@ -122,7 +122,6 @@ class TogglReportsApi
             if ($options['fullResponse'] === true) {
             	$returnFullResponse = true;
             }
-            var_dump($returnFullResponse);
 
             return $this->checkResponse($response, $returnFullResponse);
         } catch (ClientException $e) {
