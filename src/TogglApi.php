@@ -927,7 +927,7 @@ class TogglApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => $e->getResponse()->getBody()->getContents(),
             ];
         }
     }
@@ -950,7 +950,7 @@ class TogglApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => $e->getResponse()->getBody()->getContents(),
             ];
         }
     }
@@ -973,7 +973,7 @@ class TogglApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => $e->getResponse()->getBody()->getContents(),
             ];
         }
     }
@@ -996,7 +996,7 @@ class TogglApi
         } catch (ClientException $e) {
             return (object) [
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => $e->getResponse()->getBody()->getContents(),
             ];
         }
     }
