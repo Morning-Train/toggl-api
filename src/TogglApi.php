@@ -420,7 +420,7 @@ class TogglApi
      */
     public function getMe($related = false)
     {
-        return $this->GET('me', [], ['with_related_data' => $related]);
+        return $this->GET('me', ['with_related_data' => $related]);
     }
 
     /**
@@ -868,7 +868,7 @@ class TogglApi
      */
     public function getTimeEntriesInRange($start, $end)
     {
-        return $this->GET('time_entries', [], ['start_date' => $start, 'end_date' => $end]);
+        return $this->GET('time_entries', ['start_date' => $start, 'end_date' => $end]);
     }
 
     /**
@@ -918,10 +918,10 @@ class TogglApi
      *
      * @return bool|mixed|object
      */
-    private function GET($endpoint, $body = array(), $query = array())
+    private function GET($endpoint, $query = array())
     {
         try {
-            $response = $this->client->get($endpoint, ['body' => json_encode($body), 'query' => $query]);
+            $response = $this->client->get($endpoint, ['query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {
