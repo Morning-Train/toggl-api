@@ -50,7 +50,7 @@ class TogglReportsApi
     /**
      * Get project report.
      *
-     * @param string $query
+     * @param array $query
      *
      * @return bool|mixed|object
      */
@@ -62,7 +62,7 @@ class TogglReportsApi
     /**
      * Get summary report.
      *
-     * @param string $query
+     * @param array $query
      *
      * @return bool|mixed|object
      */
@@ -74,7 +74,7 @@ class TogglReportsApi
     /**
      * Get details report.
      *
-     * @param string $query
+     * @param array $query
      *
      * @return bool|mixed|object
      */
@@ -86,7 +86,7 @@ class TogglReportsApi
     /**
      * Get weekly report.
      *
-     * @param string $query
+     * @param array $query
      *
      * @return bool|mixed|object
      */
@@ -103,7 +103,7 @@ class TogglReportsApi
      *
      * @return bool|mixed|object
      */
-    private function GET($endpoint, $query = array())
+    private function GET($endpoint, array $query = array())
     {
         try {
             $response = $this->client->get($endpoint, ['query' => $query]);
