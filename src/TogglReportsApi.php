@@ -54,7 +54,7 @@ class TogglReportsApi
      *
      * @return bool|mixed|object
      */
-    public function getProjectReport($query)
+    public function getProjectReport(array $query)
     {
         return $this->get('project', $query);
     }
@@ -66,7 +66,7 @@ class TogglReportsApi
      *
      * @return bool|mixed|object
      */
-    public function getSummaryReport($query)
+    public function getSummaryReport(array $query)
     {
         return $this->get('summary', $query);
     }
@@ -78,7 +78,7 @@ class TogglReportsApi
      *
      * @return bool|mixed|object
      */
-    public function getDetailsReport($query)
+    public function getDetailsReport(array $query)
     {
         return $this->get('details', $query);
     }
@@ -90,7 +90,7 @@ class TogglReportsApi
      *
      * @return bool|mixed|object
      */
-    public function getWeeklyReport($query)
+    public function getWeeklyReport(array $query)
     {
         return $this->get('weekly', $query);
     }
