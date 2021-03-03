@@ -193,12 +193,7 @@ class TogglReportsApi
     private function checkResponse($response)
     {
         if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody());
-            if (is_object($data) && isset($data->data)) {
-                $data = $data->data;
-            }
-
-            return $data;
+            return json_decode($response->getBody());
         }
 
         return false;
