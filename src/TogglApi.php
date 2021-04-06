@@ -31,7 +31,7 @@ class TogglApi
     {
         $this->apiToken = $apiToken;
         $this->client = new Client([
-            'base_uri' => 'https://www.toggl.com/api/v8/',
+            'base_uri' => 'https://api.track.toggl.com/api/v8/',
             'auth' => [$this->apiToken, 'api_token'],
         ]);
     }
