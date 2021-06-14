@@ -28,6 +28,9 @@ Guzzle can be added with the following composer snippet:
 ```
 
 # Changelog
+### 14/06/2021 
+- Added methods for some of the undocumented project_group endpoints. This will make it possible to assign, update or remove groups from private projects.
+
 ### 30/06/17 
 - Changed function name from getDashboadForWorkspace to getDashboardForWorkspace, if your system is using getDashboadForWorkspace please change it to getDashboardForWorkspace.
 
