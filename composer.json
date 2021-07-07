@@ -1,9 +1,7 @@
 {
-	"name": "morningtrain/toggl-api",
+	"name": "proofreason/toggl-api",
     "type": "library",
     "description": "A complete native php wrapper for the Toggl API",
-    "keywords": ["toggl","api", "php"],
-    "homepage": "http://morningtrain.dk/",
     "license": "GNU General Public License v3.0",
     "authors": [
         {
