@@ -31,9 +31,9 @@ class TogglApi
     {
         $this->apiToken = $apiToken;
         $this->client = new Client([
-            'base_uri' => 'https://www.toggl.com/api/v8/',
-            'auth' => [$this->apiToken, 'api_token'],
-        ]);
+           'base_uri' => 'https://api.track.toggl.com/api/v8/',
+           'auth' => [$this->apiToken, 'api_token'],
+       ]);
     }
 
     /**
@@ -252,6 +252,78 @@ class TogglApi
     }
 
     /**
+     * Create project group relation.
+     *
+     * @param array $group
+     *
+     * Project user has the following properties
+     *
+     * - pid: project ID (integer, required)
+     * - uid: user ID, who is added to the project (integer, required)
+     * - wid: workspace ID, where the project belongs to (integer, not-required, project's workspace id is used)
+     * - manager: admin rights for this project (boolean, default false)
+     * - rate: hourly rate for the project user (float, not-required, only for pro workspaces) in the currency of the project's client or in workspace default currency.
+     * - at: timestamp that is sent in the response, indicates when the project user was last updated
+     *
+     * Workspace id (wid), project id (pid) and user id (uid) can't be changed on update.
+     *
+     * @return bool|mixed|object
+     *
+     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
+     */
+    public function createProjectGroup($project_id, $group_id, $data = [])
+    {
+        $data = [
+            'project_group' => array_merge(
+                [
+                    'pid' => $project_id,
+                    'group_ids' => [$group_id]
+                ],
+                $data
+            ),
+        ];
+
+        return $this->POST('project_groups', $data);
+    }
+
+    /**
+     * Update project user relations.
+     *
+     * @param int   $projectGroupId
+     * @param array $data
+     *
+     * @return bool|mixed|object
+     */
+    public function updateProjectGroup($projectGroupId, $data = [])
+    {
+        return $this->PUT('project_groups/'.$projectGroupId, ['project_group' => $data]);
+    }
+
+    /**
+     * Delete project group relation.
+     *
+     * @param int $projectGroupId
+     *
+     * @return bool|mixed|object
+     */
+    public function deleteProjectGroup($projectGroupId)
+    {
+        return $this->DELETE('project_groups/'.$projectGroupId);
+    }
+
+    /**
+     * Delete multiple project user relations.
+     *
+     * @param array $projectGroupIds
+     *
+     * @return bool|mixed|object
+     */
+    public function deleteProjectGroups($projectGroupIds)
+    {
+        return $this->DELETE('project_groups/'.implode(',', $projectGroupIds));
+    }
+
+    /**
      * Create Project.
      *
      * @param array $project
@@ -328,6 +400,18 @@ class TogglApi
     public function getProjectUserRelations($projectId)
     {
         return $this->GET('projects/'.$projectId.'/project_users');
+    }
+
+    /**
+     * Get project group relations.
+     *
+     * @param int $projectId
+     *
+     * @return bool|mixed|object
+     */
+    public function getProjectGroupRelations($projectId)
+    {
+        return $this->GET('projects/'.$projectId.'/project_groups');
     }
 
     /**
@@ -771,7 +855,7 @@ class TogglApi
     /**     TIME ENTRIES ()
 
 
-    */
+     */
 
     /**
      * Create time entry.
