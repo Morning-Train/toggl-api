@@ -116,7 +116,7 @@ class TogglWebhooksApi {
     }
 
     /**
-     * Get information about matching events.
+     * Validate a URL endpoint.
      *
      * @param int $subscriptionId
      *
