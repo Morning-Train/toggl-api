@@ -2,4 +2,10 @@ name: togglapi
 recipe: lamp
 config:
   webroot: .
-  xdebug: true
+services:
+  appserver:
+    type: php
+    xdebug: true
+    overrides:
+      environment:
+        XDEBUG_MODE: coverage

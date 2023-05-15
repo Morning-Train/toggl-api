@@ -33,16 +33,6 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Get available endpoints.
-     *
-     * @return bool|mixed|object
-     */
-    public function getAvailableEndpoints()
-    {
-        return $this->get('');
-    }
-
-    /**
      * @see TogglTrackMeApi::getClients()
      */
     public function getMyClients()
@@ -79,9 +69,9 @@ class TogglApi extends BaseApiClass
      *
      * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
      */
-    public function createClient($workspaceId, $clientData)
+    public function createClient($workspaceId, $clientName)
     {
-        return $this->POST("workspaces/$workspaceId/clients", ['client' => $clientData]);
+        return $this->POST("workspaces/$workspaceId/clients", ['name' => $clientName]);
     }
 
     /**
@@ -168,15 +158,11 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Get client by ID.
-     *
-     * @param int $clientId
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::getClientById
      */
-    public function getClientById($clientId)
+    public function getClientById($workspaceId, $clientId)
     {
-        return $this->GET('clients/'.$clientId);
+        return $this->workspace($workspaceId)->getClientById($clientId);
     }
 
     /**
