@@ -23,11 +23,11 @@ class BaseApiClass
      */
     protected function getBaseURI(): string
     {
-        throw new \Exception('No Base API URI has been implemented');
+        return 'https://api.track.toggl.com';
     }
 
     /**
-     * Get the base API URI
+     * Get full endpoint
      * @return string
      */
     protected function generateFullEndpoint(string $endpoint): string
@@ -179,7 +179,7 @@ class BaseApiClass
     protected function checkResponse($response)
     {
         if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody());
+            $data = json_decode($response->getBody()->getContents());
             if (is_object($data) && isset($data->data)) {
                 $data = $data->data;
             }

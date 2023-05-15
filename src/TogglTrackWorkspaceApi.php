@@ -101,7 +101,13 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getClients()
     {
-        return $this->GET('clients');
+        $clients = $this->GET('clients');
+
+        if(empty($clients)) {
+            return [];
+        }
+
+        return $clients;
     }
 
     /**

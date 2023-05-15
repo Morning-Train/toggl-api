@@ -2,9 +2,6 @@
 
 namespace MorningTrain\TogglApi;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-
 /**
  * Wrapper for the Toggl Api.
  *
@@ -14,12 +11,13 @@ class TogglApi extends BaseApiClass
 {
 
     /**
-     * Get the base API URI
+     * Get full endpoint
      * @return string
      */
-    protected function getBaseURI(): string
+    protected function generateFullEndpoint(string $endpoint): string
     {
-        return 'https://api.track.toggl.com/api/v9/';
+        $fragments = ['api', 'v9', $endpoint];
+        return implode('/', array_filter($fragments));
     }
 
     public function me(): TogglTrackMeApi
@@ -596,15 +594,11 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Get workspace clients.
-     *
-     * @param int $wid
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::getClients
      */
-    public function getWorkspaceClients($wid)
+    public function getWorkspaceClients($workspaceId)
     {
-        return $this->GET('workspaces/'.$wid.'/clients');
+        return $this->workspace($workspaceId)->getClients();
     }
 
     /**
@@ -937,6 +931,15 @@ class TogglApi extends BaseApiClass
     public function deleteTimeEntry($workspaceId, $timeEntryId)
     {
         return $this->workspace($workspaceId)->deleteTimeEntry($timeEntryId);
+    }
+
+    /////////////////////////////
+    /// Organizations
+    /////////////////////////////
+
+    public function getOrganizationById($organizationId)
+    {
+        return $this->GET("organizations/$organizationId");
     }
 
 }
