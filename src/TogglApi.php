@@ -22,12 +22,12 @@ class TogglApi extends BaseApiClass
         return 'https://api.track.toggl.com/api/v9/';
     }
 
-    protected function me(): TogglTrackMeApi
+    public function me(): TogglTrackMeApi
     {
         return new TogglTrackMeApi($this->apiToken);
     }
 
-    protected function workspace($workspaceId): TogglTrackWorkspaceApi
+    public function workspace($workspaceId): TogglTrackWorkspaceApi
     {
         return new TogglTrackWorkspaceApi($this->apiToken, $workspaceId);
     }
@@ -602,10 +602,11 @@ class TogglApi extends BaseApiClass
      * @param int $wid
      *
      * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::getUsers
      */
-    public function getWorkspaceUsers($wid)
+    public function getWorkspaceUsers($workspaceId)
     {
-        return $this->GET('workspaces/'.$wid.'/users');
+        return $this->workspace($workspaceId)->getUsers();
     }
 
     /**
@@ -937,12 +938,7 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Update time entry.
-     *
-     * @param int   $timeEntryId
-     * @param array $entry
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::updateTimeEntry
      */
     public function updateTimeEntry($workspaceId, $timeEntryId, $entry)
     {
@@ -950,15 +946,11 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Delete time entry.
-     *
-     * @param int $timeEntryId
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::deleteTimeEntry
      */
-    public function deleteTimeEntry($timeEntryId)
+    public function deleteTimeEntry($workspaceId, $timeEntryId)
     {
-        return $this->DELETE('time_entries/'.$timeEntryId);
+        return $this->workspace($workspaceId)->deleteTimeEntry($timeEntryId);
     }
 
 }

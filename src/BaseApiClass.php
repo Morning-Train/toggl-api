@@ -27,6 +27,15 @@ class BaseApiClass
     }
 
     /**
+     * Get the base API URI
+     * @return string
+     */
+    protected function generateFullEndpoint(string $endpoint): string
+    {
+        return $endpoint;
+    }
+
+    /**
      * TogglApi constructor.
      *
      * @param string $apiToken
@@ -52,7 +61,8 @@ class BaseApiClass
     protected function GET($endpoint, $query = array())
     {
         try {
-            $response = $this->client->get($endpoint, ['query' => $query]);
+            $fullEndpoint = $this->generateFullEndpoint($endpoint);
+            $response = $this->client->get($fullEndpoint, ['query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {
@@ -75,7 +85,8 @@ class BaseApiClass
     protected function POST($endpoint, $body = array(), $query = array())
     {
         try {
-            $response = $this->client->post($endpoint, ['body' => json_encode($body), 'query' => $query]);
+            $fullEndpoint = $this->generateFullEndpoint($endpoint);
+            $response = $this->client->post($fullEndpoint, ['body' => json_encode($body), 'query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {
@@ -98,7 +109,8 @@ class BaseApiClass
     protected function PUT($endpoint, $body = array(), $query = array())
     {
         try {
-            $response = $this->client->put($endpoint, ['body' => json_encode($body), 'query' => $query]);
+            $fullEndpoint = $this->generateFullEndpoint($endpoint);
+            $response = $this->client->put($fullEndpoint, ['body' => json_encode($body), 'query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {
@@ -121,7 +133,8 @@ class BaseApiClass
     protected function PATCH($endpoint, $body = array(), $query = array())
     {
         try {
-            $response = $this->client->patch($endpoint, ['body' => json_encode($body), 'query' => $query]);
+            $fullEndpoint = $this->generateFullEndpoint($endpoint);
+            $response = $this->client->patch($fullEndpoint, ['body' => json_encode($body), 'query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {
@@ -144,7 +157,8 @@ class BaseApiClass
     protected function DELETE($endpoint, $body = array(), $query = array())
     {
         try {
-            $response = $this->client->delete($endpoint, ['body' => json_encode($body), 'query' => $query]);
+            $fullEndpoint = $this->generateFullEndpoint($endpoint);
+            $response = $this->client->delete($fullEndpoint, ['body' => json_encode($body), 'query' => $query]);
 
             return $this->checkResponse($response);
         } catch (ClientException $e) {

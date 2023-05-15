@@ -17,9 +17,19 @@ class TogglTrackMeApi extends BaseApiClass
      * Get the base API URI
      * @return string
      */
-    protected function getBaseURI()
+    protected function getBaseURI(): string
     {
-        return 'https://api.track.toggl.com/api/v9/me';
+        return 'https://api.track.toggl.com';
+    }
+
+    /**
+     * Get the base API URI
+     * @return string
+     */
+    protected function generateFullEndpoint(string $endpoint): string
+    {
+        $fragments = ['api', 'v9', 'me', $endpoint];
+        return implode('/', array_filter($fragments));
     }
 
     /**
@@ -54,7 +64,7 @@ class TogglTrackMeApi extends BaseApiClass
      */
     public function getMe($related = false)
     {
-        return $this->GET('me', ['with_related_data' => $related]);
+        return $this->GET('', ['with_related_data' => $related]);
     }
 
     /**
@@ -66,7 +76,7 @@ class TogglTrackMeApi extends BaseApiClass
      */
     public function updateMe($user)
     {
-        return $this->PUT('me', ['user' => $user]);
+        return $this->PUT('', ['user' => $user]);
     }
 
     /**

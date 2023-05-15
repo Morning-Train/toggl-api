@@ -33,7 +33,17 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     protected function getBaseURI(): string
     {
-        return 'https://api.track.toggl.com/api/v9/workspaces/'.$this->workspaceId;
+        return 'https://api.track.toggl.com';
+    }
+
+    /**
+     * Get the base API URI
+     * @return string
+     */
+    protected function generateFullEndpoint(string $endpoint): string
+    {
+        $fragments = ['api', 'v9', 'workspaces', $this->workspaceId, $endpoint];
+        return implode('/', array_filter($fragments));
     }
 
     /**
@@ -236,5 +246,30 @@ class TogglTrackWorkspaceApi extends BaseApiClass
         return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $entry]);
     }
 
+    /**
+     * Delete time entry.
+     *
+     * @param int $timeEntryId
+     *
+     * @return bool|mixed|object
+     */
+    public function deleteTimeEntry($timeEntryId)
+    {
+        return $this->DELETE('time_entries/'.$timeEntryId);
+    }
+
+    /////////////////////////////
+    /// Users
+    /////////////////////////////
+
+    /**
+     * Get workspaces users.
+     *
+     * @return bool|mixed|object
+     */
+    public function getUsers()
+    {
+        return $this->GET('workspace_users');
+    }
 
 }

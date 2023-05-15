@@ -2,3 +2,4 @@
 .env
 test.php
 .idea
+.phpunit.result.cache

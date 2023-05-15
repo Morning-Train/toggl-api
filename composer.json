@@ -24,6 +24,13 @@
     },
 	"require-dev": {
 		"squizlabs/php_codesniffer": "2.*",
-		"escapestudios/symfony2-coding-standard": "2.*"
+		"escapestudios/symfony2-coding-standard": "2.*",
+		"pestphp/pest": "^1.23",
+		"vlucas/phpdotenv": "^5.5"
+	},
+	"config": {
+		"allow-plugins": {
+			"pestphp/pest-plugin": true
+		}
 	}
 }
