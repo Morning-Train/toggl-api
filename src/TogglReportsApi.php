@@ -10,31 +10,16 @@ use GuzzleHttp\Exception\ClientException;
  *
  * @see https://github.com/toggl/toggl_api_docs/blob/master/reports.md
  */
-class TogglReportsApi
+class TogglReportsApi extends BaseApiClass
 {
 
     /**
-     * @var string
+     * Get the base API URI
+     * @return string
      */
-    protected $apiToken = '';
-
-    /**
-     * @var \GuzzleHttp\Client
-     */
-    protected $client;
-
-    /**
-     * TogglReportsApi constructor.
-     *
-     * @param string $apiToken
-     */
-    public function __construct($apiToken)
+    protected function getBaseURI(): string
     {
-        $this->apiToken = $apiToken;
-        $this->client = new Client([
-            'base_uri' => 'https://api.track.toggl.com/reports/api/v2/',
-            'auth' => [$this->apiToken, 'api_token'],
-        ]);
+        return 'https://api.track.toggl.com/reports/api/v2/';
     }
 
     /**
@@ -95,112 +80,4 @@ class TogglReportsApi
         return $this->get('weekly', $query);
     }
 
-    /**
-     * Helper for client get command.
-     *
-     * @param string $endpoint
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function GET($endpoint, $query = array())
-    {
-        try {
-            $response = $this->client->get($endpoint, ['query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for client post command.
-     *
-     * @param string $endpoint
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function POST($endpoint, $query = array())
-    {
-        try {
-            $response = $this->client->post($endpoint, ['query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for client put command.
-     *
-     * @param string $endpoint
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function PUT($endpoint, $query = array())
-    {
-        try {
-            $response = $this->client->put($endpoint, ['query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for client delete command.
-     *
-     * @param string $endpoint
-     * @param array $query
-     *
-     * @return bool|mixed|object
-     */
-    private function DELETE($endpoint, $query = array())
-    {
-        try {
-            $response = $this->client->delete($endpoint, ['query' => $query]);
-
-            return $this->checkResponse($response);
-        } catch (ClientException $e) {
-            return (object) [
-                'success' => false,
-                'message' => $e->getMessage(),
-            ];
-        }
-    }
-
-    /**
-     * Helper for checking http response.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *
-     * @return bool|mixed
-     */
-    private function checkResponse($response)
-    {
-        if ($response->getStatusCode() == 200) {
-            $data = json_decode($response->getBody());
-            if (is_object($data) && isset($data->data)) {
-                $data = $data->data;
-            }
-
-            return $data;
-        }
-
-        return false;
-    }
 }
