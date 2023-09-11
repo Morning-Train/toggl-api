@@ -66,20 +66,20 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function createClient($clientData)
     {
-        return $this->POST("clients", ['client' => $clientData]);
+        return $this->POST("clients", $clientData);
     }
 
     /**
      * Update client.
      *
-     * @param int   $clientId
+     * @param int $clientId
      * @param array $clientData
      *
      * @return bool|mixed|object
      */
     public function updateClient($clientId, $clientData)
     {
-        return $this->PUT('clients/'.$clientId, ['client' => $clientData]);
+        return $this->PUT('clients/' . $clientId, ['client' => $clientData]);
     }
 
     /**
@@ -91,7 +91,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function deleteClient($clientId)
     {
-        return $this->DELETE('clients/'.$clientId);
+        return $this->DELETE('clients/' . $clientId);
     }
 
     /**
@@ -103,7 +103,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
     {
         $clients = $this->GET('clients');
 
-        if(empty($clients)) {
+        if (empty($clients)) {
             return [];
         }
 
@@ -119,7 +119,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getClientProjects($clientId)
     {
-        return $this->GET('clients/'.$clientId.'/projects');
+        return $this->GET('clients/' . $clientId . '/projects');
     }
 
     /**
@@ -131,7 +131,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getActiveClientProjects($clientId)
     {
-        return $this->GET('clients/'.$clientId.'/projects?active=true');
+        return $this->GET('clients/' . $clientId . '/projects?active=true');
     }
 
     /**
@@ -143,7 +143,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getInactiveClientProjects($clientId)
     {
-        return $this->GET('clients/'.$clientId.'/projects?active=false');
+        return $this->GET('clients/' . $clientId . '/projects?active=false');
     }
 
     /**
@@ -155,7 +155,74 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getAllClientProjects($clientId)
     {
-        return $this->GET('clients/'.$clientId.'/projects?active=both');
+        return $this->GET('clients/' . $clientId . '/projects?active=both');
+    }
+
+    /**
+     * Get project.
+     *
+     * @param int $projectId
+     *
+     * @return bool|mixed|object
+     */
+    public function getProject($projectId)
+    {
+        return $this->GET("projects/{$projectId}");
+    }
+
+    /**
+     * Get projects.
+     *
+     * @param array $options
+     *
+     * @return bool|mixed|object
+     */
+    public function getProjects($options)
+    {
+        return $this->GET('projects', $options);
+    }
+
+    /**
+     * Create Project.
+     *
+     * @param array $project
+     *
+     * Project has the following properties:
+     * - name: The name of the project (string, required, unique for client and workspace)
+     * - wid: workspace ID, where the project will be saved (integer, required)
+     * - cid: client ID (integer, not required)
+     * - active: whether the project is archived or not (boolean, by default true)
+     * - is_private: whether project is accessible for only project users or for all workspace users (boolean, default true)
+     * - template: whether the project can be used as a template (boolean, not required)
+     * - template_id: id of the template project used on current project's creation
+     * - billable: whether the project is billable or not (boolean, default true, available only for pro workspaces)
+     * - auto_estimates: whether the estimated hours is calculated based on task estimations or is fixed manually (boolean, default false, not required, premium functionality)
+     * - estimated_hours: if auto_estimates is true then the sum of task estimations is returned, otherwise user inserted hours (integer, not required, premium functionality)
+     * - at: timestamp that is sent in the response for PUT, indicates the time task was last updated (read-only)
+     * - color: id of the color selected for the project
+     * - rate: hourly rate of the project (float, not required, premium functionality)
+     * - created_at: timestamp indicating when the project was created (UTC time), read-only
+     *
+     * @return bool|mixed|object
+     *
+     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md
+     */
+    public function createProject($project)
+    {
+        return $this->POST('projects', $project);
+    }
+
+    /**
+     * Update a project.
+     *
+     * @param int $projectId
+     * @param array $project
+     *
+     * @return bool|mixed|object
+     */
+    public function updateProject($projectId, $project)
+    {
+        return $this->PUT("projects/{$projectId}", $project);
     }
 
     /**
@@ -167,7 +234,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getClientById($clientId)
     {
-        return $this->GET('clients/'.$clientId);
+        return $this->GET("clients/{$clientId}");
     }
 
     /////////////////////////////
@@ -200,19 +267,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function createTimeEntry($entry)
     {
-        return $this->POST('time_entries', ['time_entry' => $entry]);
-    }
-
-    /**
-     * Start time entry.
-     *
-     * @param array $entry
-     *
-     * @return bool|mixed|object
-     */
-    public function startTimeEntry($entry)
-    {
-        return $this->POST('time_entries/start', ['time_entry' => $entry]);
+        return $this->POST('time_entries', $entry);
     }
 
     /**
@@ -224,7 +279,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function stopTimeEntry($timeEntryId)
     {
-        return $this->PATCH('time_entries/'.$timeEntryId.'/stop');
+        return $this->PATCH("time_entries/{$timeEntryId}/stop");
     }
 
     /**
@@ -236,20 +291,20 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function getTimeEntry($timeEntryId)
     {
-        return $this->GET('time_entries/'.$timeEntryId);
+        return $this->GET("time _entries/{$timeEntryId}");
     }
 
     /**
      * Update time entry.
      *
-     * @param int   $timeEntryId
+     * @param int $timeEntryId
      * @param array $entry
      *
      * @return bool|mixed|object
      */
     public function updateTimeEntry($timeEntryId, $entry)
     {
-        return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $entry]);
+        return $this->PUT('time_entries/' . $timeEntryId, ['time_entry' => $entry]);
     }
 
     /**
@@ -261,7 +316,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      */
     public function deleteTimeEntry($timeEntryId)
     {
-        return $this->DELETE('time_entries/'.$timeEntryId);
+        return $this->DELETE('time_entries/' . $timeEntryId);
     }
 
     /////////////////////////////
@@ -278,4 +333,112 @@ class TogglTrackWorkspaceApi extends BaseApiClass
         return $this->GET('workspace_users');
     }
 
+    /**
+     * Create project user relation.
+     *
+     * @param array $user
+     *
+     * Project user has the following properties
+     *
+     * - pid: project ID (integer, required)
+     * - uid: user ID, who is added to the project (integer, required)
+     * - wid: workspace ID, where the project belongs to (integer, not-required, project's workspace id is used)
+     * - manager: admin rights for this project (boolean, default false)
+     * - rate: hourly rate for the project user (float, not-required, only for pro workspaces) in the currency of the project's client or in workspace default currency.
+     * - at: timestamp that is sent in the response, indicates when the project user was last updated
+     *
+     * Workspace id (wid), project id (pid) and user id (uid) can't be changed on update.
+     *
+     * @return bool|mixed|object
+     *
+     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
+     */
+    public function createProjectUser($user)
+    {
+        return $this->POST('project_users', $user);
+    }
+
+
+    /**
+     * Create task.
+     *
+     * @param int $projectId
+     * @param array $task
+     *
+     * @return bool|mixed|object
+     */
+    public function createTask($projectId, $task)
+    {
+        return $this->POST("projects/{$projectId}/tasks", $task);
+    }
+
+    /**
+     * Update a task.
+     *
+     * @param int $projectId
+     * @param int $taskId
+     * @param array $task
+     *
+     * @return bool|mixed|object
+     */
+    public function updateTask($projectId, $taskId, $task)
+    {
+        return $this->PUT("projects/{$projectId}/tasks/{$taskId}", $task);
+    }
+
+    /**
+     * Update multiple tasks.
+     *
+     * @param int $projectId
+     * @param array $taskIds
+     * @param array $task
+     *
+     * @return bool|mixed|object
+     */
+    public function updateTasks($projectId, $taskIds, $task)
+    {
+        $taskIdString = implode(',', $taskIds);
+
+        return $this->PATCH("projects/{$projectId}/tasks/{$taskIdString}", $task);
+    }
+
+    /**
+     * Delete a task.
+     *
+     * @param int $projectId
+     * @param int $taskId
+     *
+     * @return bool|mixed|object
+     */
+    public function deleteTask($projectId, $taskId)
+    {
+        return $this->DELETE("projects/{$projectId}/tasks/{$taskId}");
+    }
+
+    /**
+     * Get task.
+     *
+     * Tasks are available only for pro workspaces.
+     *
+     * @param int $taskId
+     *
+     * @return bool|mixed|object
+     * Task has the following properties:
+     * - name: The name of the task (string, required, unique in project)
+     * - pid: project ID for the task (integer, required)
+     * - wid: workspace ID, where the task will be saved (integer, project's workspace id is used when not supplied)
+     * - uid: user ID, to whom the task is assigned to (integer, not required)
+     * - estimated_seconds: estimated duration of task in seconds (integer, not required)
+     * - active: whether the task is done or not (boolean, by default true)
+     * - at: timestamp that is sent in the response for PUT, indicates the time task was last updated
+     * - tracked_seconds: total time tracked (in seconds) for the task
+     *
+     * Workspace id (wid) and project id (pid) can't be changed on update.
+     *
+     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/tasks.md
+     */
+    public function getTask($taskId)
+    {
+        return $this->GET('tasks/' . $taskId);
+    }
 }

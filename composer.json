@@ -19,8 +19,8 @@
         }
     },
     "require": {
-        "php": "^7.4",
-        "guzzlehttp/guzzle": "^6.3|^7.0"
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^6.3|^7.0",
     },
 	"require-dev": {
 		"squizlabs/php_codesniffer": "2.*",
@@ -32,5 +32,10 @@
 		"allow-plugins": {
 			"pestphp/pest-plugin": true
 		}
-	}
+	},
+    "scripts": {
+        "test": [
+            "lando php ./vendor/bin/pest"
+        ]
+    }
 }

@@ -50,26 +50,11 @@ class TogglApi extends BaseApiClass
 
 
     /**
-     * Create client in the provided workspace
-     *
-     * @param array $clientData
-     *
-     * Client has the following properties
-     *
-     * - name: The name of the client (string, required, unique in workspace)
-     * - wid: workspace ID, where the client will be used (integer, required)
-     * - notes: Notes for the client (string, not required)
-     * - hrate: The hourly rate for this client (float, not required, available only for pro workspaces)
-     * - cur: The name of the client's currency (string, not required, available only for pro workspaces)
-     * - at: timestamp that is sent in the response, indicates the time client was last updated
-     *
-     * @return bool|mixed|object
-     *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
+     * @see TogglTrackWorkspaceApi::createClient()
      */
     public function createClient($workspaceId, $clientName)
     {
-        return $this->POST("workspaces/$workspaceId/clients", ['name' => $clientName]);
+        return $this->workspace($workspaceId)->createClient(['name' => $clientName]);
     }
 
     /**
@@ -164,28 +149,11 @@ class TogglApi extends BaseApiClass
     }
 
     /**
-     * Create project user relation.
-     *
-     * @param array $user
-     *
-     * Project user has the following properties
-     *
-     * - pid: project ID (integer, required)
-     * - uid: user ID, who is added to the project (integer, required)
-     * - wid: workspace ID, where the project belongs to (integer, not-required, project's workspace id is used)
-     * - manager: admin rights for this project (boolean, default false)
-     * - rate: hourly rate for the project user (float, not-required, only for pro workspaces) in the currency of the project's client or in workspace default currency.
-     * - at: timestamp that is sent in the response, indicates when the project user was last updated
-     *
-     * Workspace id (wid), project id (pid) and user id (uid) can't be changed on update.
-     *
-     * @return bool|mixed|object
-     *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
+     * @see TogglTrackWorkspaceApi::createProjectUser
      */
-    public function createProjectUser($user)
+    public function createProjectUser($workspaceId, $user)
     {
-        return $this->POST('project_users', ['project_user' => $user]);
+        return $this->workspace($workspaceId)->createProjectUser($user);
     }
 
     /**
@@ -347,22 +315,23 @@ class TogglApi extends BaseApiClass
      *
      * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md
      */
-    public function createProject($project)
+    public function createProject($workspaceId, $project)
     {
-        return $this->POST('projects', ['project' => $project]);
+        return $this->workspace($workspaceId)->createProject($project);
     }
 
     /**
      * Update a project.
      *
+     * @param int   $workspaceId
      * @param int   $projectId
      * @param array $project
      *
      * @return bool|mixed|object
      */
-    public function updateProject($projectId, $project)
+    public function updateProject($workspaceId, $projectId, $project)
     {
-        return $this->PUT('projects/'.$projectId, ['project' => $project]);
+        return $this->workspace($workspaceId)->updateProject($projectId, $project);
     }
 
     /**
@@ -428,13 +397,27 @@ class TogglApi extends BaseApiClass
     /**
      * Get project.
      *
+     * @param int $workspaceId
      * @param int $projectId
      *
      * @return bool|mixed|object
      */
-    public function getProject($projectId)
+    public function getProject($workspaceId, $projectId)
     {
-        return $this->GET('projects/'.$projectId);
+        return $this->workspace($workspaceId)->getProject($projectId);
+    }
+
+    /**
+     * Get project.
+     *
+     * @param int $workspaceId
+     * @param int $projectId
+     *
+     * @return bool|mixed|object
+     */
+    public function getProjects($workspaceId, $options = [])
+    {
+        return $this->workspace($workspaceId)->getProjects($options);
     }
 
     /**
@@ -750,92 +733,43 @@ class TogglApi extends BaseApiClass
     */
 
     /**
-     * Get task.
-     *
-     * Tasks are available only for pro workspaces.
-     *
-     * @param int $taskId
-     *
-     * @return bool|mixed|object
-     * Task has the following properties:
-     * - name: The name of the task (string, required, unique in project)
-     * - pid: project ID for the task (integer, required)
-     * - wid: workspace ID, where the task will be saved (integer, project's workspace id is used when not supplied)
-     * - uid: user ID, to whom the task is assigned to (integer, not required)
-     * - estimated_seconds: estimated duration of task in seconds (integer, not required)
-     * - active: whether the task is done or not (boolean, by default true)
-     * - at: timestamp that is sent in the response for PUT, indicates the time task was last updated
-     * - tracked_seconds: total time tracked (in seconds) for the task
-     *
-     * Workspace id (wid) and project id (pid) can't be changed on update.
-     *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/tasks.md
+     * @see TogglTrackWorkspaceApi::getTask()
      */
-    public function getTask($taskId)
+    public function getTask($workspaceId, $taskId)
     {
-        return $this->GET('tasks/'.$taskId);
+        return $this->workspace($workspaceId)->getTask($taskId);
     }
 
     /**
-     * Create task.
-     *
-     * @param array $task
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::createTask()
      */
-    public function createTask($task)
+    public function createTask($workspaceId, $projectId, $task)
     {
-        return $this->POST('tasks', ['task' => $task]);
+        return $this->workspace($workspaceId)->createTask($projectId, $task);
     }
 
     /**
-     * Update task.
-     *
-     * @param int   $taskId
-     * @param array $task
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::updateTask()
      */
-    public function updateTask($taskId, $task)
+    public function updateTask($workspaceId, $projectId, $taskId, $task)
     {
-        return $this->PUT('tasks/'.$taskId, ['task' => $task]);
+        return $this->workspace($workspaceId)->updateTask($projectId, $taskId, $task);
     }
 
     /**
-     * Update multiple tasks.
-     *
-     * @param array $taskIds
-     * @param array $task
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::deleteTask()
      */
-    public function updateTasks($taskIds, $task)
+    public function deleteTask($workspaceId, $projectId, $taskId)
     {
-        return $this->PUT('tasks/'.implode(',', $taskIds), ['task' => $task]);
+        return $this->workspace($workspaceId)->deleteTask($projectId, $taskId);
     }
 
     /**
-     * Delete task.
-     *
-     * @param int $taskId
-     *
-     * @return bool|mixed|object
+     * @see TogglTrackWorkspaceApi::updateTasks()
      */
-    public function deleteTask($taskId)
+    public function updateTasks($workspaceId, $projectId, $taskIds, $task)
     {
-        return $this->DELETE('tasks/'.$taskId);
-    }
-
-    /**
-     * Delete multiple tasks.
-     *
-     * @param int $taskIds
-     *
-     * @return bool|mixed|object
-     */
-    public function deleteTasks($taskIds)
-    {
-        return $this->DELETE('tasks/'.implode(',', $taskIds));
+        return $this->workspace($workspaceId)->updateTasks($projectId, $taskIds, $task);
     }
 
 
@@ -856,7 +790,7 @@ class TogglApi extends BaseApiClass
      */
     public function startTimeEntry($workspaceId, $entry)
     {
-        return $this->workspace($workspaceId)->startTimeEntry($entry);
+        return $this->workspace($workspaceId)->createTimeEntry($entry);
     }
 
     /**

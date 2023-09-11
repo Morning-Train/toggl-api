@@ -19,3 +19,12 @@ test('has-workspace', function () use($api) {
     expect($workspaceId)->toBeIn($workspaceIds);
 
 });
+
+it('can create project user', function () use($api) {
+    $workspaceId = (string) $_ENV['TOGGL_WORKSPACE_ID'];
+
+    $response = $api->createProjectUser($workspaceId, [
+        'user_id' => 10651606,
+        'project_id' => 194977014,
+    ]);
+});
