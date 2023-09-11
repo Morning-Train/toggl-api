@@ -444,6 +444,7 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      *
      * Tasks are available only for pro workspaces.
      *
+     * @param int $projectId
      * @param int $taskId
      *
      * @return bool|mixed|object
@@ -461,8 +462,8 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      *
      * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/tasks.md
      */
-    public function getTask($taskId)
+    public function getTask($projectId, $taskId)
     {
-        return $this->GET('tasks/' . $taskId);
+        return $this->GET("projects/{$projectId}/tasks/{$taskId}");
     }
 }

@@ -737,9 +737,9 @@ class TogglApi extends BaseApiClass
     /**
      * @see TogglTrackWorkspaceApi::getTask()
      */
-    public function getTask($workspaceId, $taskId)
+    public function getTask($workspaceId, $projectId, $taskId)
     {
-        return $this->workspace($workspaceId)->getTask($taskId);
+        return $this->workspace($workspaceId)->getTask($projectId, $taskId);
     }
 
     /**
