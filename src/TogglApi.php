@@ -373,13 +373,14 @@ class TogglApi extends BaseApiClass
     /**
      * Get project group relations.
      *
+     * @param int $workspaceId
      * @param int $projectId
      *
      * @return bool|mixed|object
      */
-    public function getProjectGroupRelations($projectId)
+    public function getProjectGroupRelations($workspaceId, $projectId)
     {
-        return $this->GET('projects/'.$projectId.'/project_groups');
+        return $this->workspace($workspaceId)->getProjectGroupRelations($projectId);
     }
 
     /**
