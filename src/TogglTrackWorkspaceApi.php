@@ -238,6 +238,18 @@ class TogglTrackWorkspaceApi extends BaseApiClass
     }
 
     /**
+     * Get project group relations.
+     *
+     * @param int $projectId
+     *
+     * @return bool|mixed|object
+     */
+    public function getProjectTasks($projectId)
+    {
+        return $this->GET("projects/{$projectId}/tasks");
+    }
+
+    /**
      * Get client by ID.
      *
      * @param int $clientId

@@ -386,13 +386,14 @@ class TogglApi extends BaseApiClass
     /**
      * Get project tasks.
      *
+     * @param int $workspaceId
      * @param int $projectId
      *
      * @return bool|mixed|object
      */
-    public function getProjectTasks($projectId)
+    public function getProjectTasks($workspaceId, $projectId)
     {
-        return $this->GET('projects/'.$projectId.'/tasks');
+        return $this->workspace($workspaceId)->getProjectTasks($projectId);
     }
 
     /**
