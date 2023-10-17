@@ -435,3 +435,50 @@ $toggl->getDetailsReport($query);
 ```
 $toggl->getWeeklyReport($query);
 ```
+
+## Webhooks API
+https://github.com/toggl/toggl_api_docs/blob/master/webhooks.md
+
+### Initialization
+
+```
+$toggl = new MorningTrain\TogglApi\TogglWebhooksApi('my-api-token','my-workspace');
+```
+
+### Get available subscriptions
+
+```
+$toggl->getAvailableSubscriptions();
+```
+
+### Methods
+
+#### Create subscription
+```
+$toggl->createSubscription($subscription);
+```
+
+#### Update subscription
+```
+$toggl->updateSubscription($subscriptionId, $subscription);
+```
+
+#### Delete subscription
+```
+$toggl->deleteSubscription($subscriptionId);
+```
+
+#### Ping a subscription
+```
+$toggl->pingSubscription($subscriptionId);
+```
+
+#### Get information about matching events
+```
+$toggl->getEventsInfo($subscriptionId);
+```
+
+#### Validate a URL endpoint
+```
+$toggl->validateEndpoint($subscriptionId, $validationCode);
+```
