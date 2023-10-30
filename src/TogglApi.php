@@ -67,7 +67,7 @@ class TogglApi extends BaseApiClass
      */
     public function updateClient($workspaceId, $clientId, $clientData)
     {
-        return $this->PUT('clients/'.$clientId, ['client' => $clientData]);
+        return $this->workspace($workspaceId)->updateClient($clientId, ['client' => $clientData]);
     }
 
     /**
