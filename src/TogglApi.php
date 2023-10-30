@@ -61,13 +61,13 @@ class TogglApi extends BaseApiClass
      * Update client.
      *
      * @param int   $clientId
-     * @param array $clientData
+     * @param array $client
      *
      * @return bool|mixed|object
      */
-    public function updateClient($workspaceId, $clientId, $clientData)
+    public function updateClient($workspaceId, $clientId, $client)
     {
-        return $this->PUT('clients/'.$clientId, ['client' => $clientData]);
+        return $this->workspace($workspaceId)->updateClient($clientId, $client);
     }
 
     /**

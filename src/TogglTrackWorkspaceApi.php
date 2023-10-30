@@ -73,13 +73,13 @@ class TogglTrackWorkspaceApi extends BaseApiClass
      * Update client.
      *
      * @param int $clientId
-     * @param array $clientData
+     * @param array $client
      *
      * @return bool|mixed|object
      */
-    public function updateClient($clientId, $clientData)
+    public function updateClient($clientId, $client)
     {
-        return $this->PUT('clients/' . $clientId, ['client' => $clientData]);
+        return $this->PUT("clients/{$clientId}", $client);
     }
 
     /**
