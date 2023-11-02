@@ -52,9 +52,9 @@ class TogglApi extends BaseApiClass
     /**
      * @see TogglTrackWorkspaceApi::createClient()
      */
-    public function createClient($workspaceId, $clientName)
+    public function createClient($workspaceId, $client)
     {
-        return $this->workspace($workspaceId)->createClient(['name' => $clientName]);
+        return $this->workspace($workspaceId)->createClient($client);
     }
 
     /**
