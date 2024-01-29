@@ -180,6 +180,16 @@ class TogglTrackMeApi extends BaseApiClass
     }
 
     /**
+     * Get paginated projects for the current user.
+     *
+     * @return bool|mixed|object
+     */
+    public function getPaginatedProjects(int $startProjectId = 0)
+    {
+        return $this->GET('projects/paginated', ['start_project_id' => $startProjectId]);
+    }
+
+    /**
      * Get tags for the current user.
      *
      * @return bool|mixed|object
