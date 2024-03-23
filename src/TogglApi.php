@@ -1010,7 +1010,7 @@ class TogglApi
      */
     public function updateTimeEntry($timeEntryId, $entry)
     {
-        return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $entry]);
+        return $this->PUT('time_entries/'.$timeEntryId, $entry);
     }
 
     /**
