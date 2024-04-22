@@ -661,26 +661,23 @@ class TogglApi
     /**
      * Get workspace tasks.
      *
-     * @param int   $wid
      * @param array $options
      *
      * @return bool|mixed|object
      */
-    public function getWorkspaceTasks($wid, $options = [])
+    public function getWorkspaceTasks($options = [])
     {
-        return $this->GET('workspaces/'.$wid.'/tasks', $options);
+        return $this->GET("workspaces/{$this->workspaceId}/tasks", $options);
     }
 
     /**
      * Get workspace tags.
      *
-     * @param int $wid
-     *
      * @return bool|mixed|object
      */
-    public function getWorkspaceTags($wid)
+    public function getWorkspaceTags()
     {
-        return $this->GET('workspaces/'.$wid.'/tags');
+        return $this->GET("workspaces/{$this->workspaceId}/tags");
     }
 
     /**
@@ -746,31 +743,28 @@ class TogglApi
     /**
      * Create tag.
      *
-     * @param array $tag
-     * Tag has the following properties
-     * - name: The name of the tag (string, required, unique in workspace)
-     * - wid: workspace ID, where the tag will be used (integer, required)
+     * @param string $tagName
      *
      * @return bool|mixed|object
      *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md
+     * @see https://engineering.toggl.com/docs/api/tags
      */
-    public function createTag($tag)
+    public function createTag($tagName)
     {
-        return $this->POST('tags', ['tag' => $tag]);
+        return $this->POST("workspaces/{$this->workspaceId}/tags", ['name' => $tagName]);
     }
 
     /**
      * Update tag.
      *
      * @param int   $tagId
-     * @param array $tag
+     * @param string $tagName
      *
      * @return bool|mixed|object
      */
-    public function updateTag($tagId, $tag)
+    public function updateTag($tagId, $tagName)
     {
-        return $this->PUT('tags/'.$tagId, ['tag' => $tag]);
+        return $this->PUT("workspaces/{$this->workspaceId}/tags/{$tagId}", ['name' => $tagName]);
     }
 
     /**
@@ -782,10 +776,10 @@ class TogglApi
      */
     public function deleteTag($tagId)
     {
-        return $this->DELETE('tags/'.$tagId);
+        return $this->DELETE("workspaces/{$this->workspaceId}/tags/{$tagId}");
     }
 
-    /*  TAGS (https://github.com/toggl/toggl_api_docs/blob/master/chapters/tags.md)
+    /*  TAGS (https://engineering.toggl.com/docs/api/tags)
 
 
 
