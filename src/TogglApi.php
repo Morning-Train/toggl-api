@@ -67,11 +67,11 @@ class TogglApi
      *
      * @return bool|mixed|object
      *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md
+     * @see https://engineering.toggl.com/docs/api/clients
      */
     public function createClient($client)
     {
-        return $this->POST("workspaces/{$this->workspaceId}/clients", ['client' => $client]);
+        return $this->POST("workspaces/{$this->workspaceId}/clients", $client);
     }
 
     /**
@@ -84,7 +84,7 @@ class TogglApi
      */
     public function updateClient($clientId, $client)
     {
-        return $this->PUT('clients/'.$clientId, ['client' => $client]);
+        return $this->PUT("workspaces/{$this->workspaceId}/clients/{$clientId}", $client);
     }
 
     /**
@@ -96,7 +96,7 @@ class TogglApi
      */
     public function deleteClient($clientId)
     {
-        return $this->DELETE('clients/'.$clientId);
+        return $this->DELETE("workspaces/{$this->workspaceId}/clients/{$clientId}");
     }
 
     /**
@@ -106,7 +106,7 @@ class TogglApi
      */
     public function getClients()
     {
-        return $this->GET('clients');
+        return $this->GET("workspaces/{$this->workspaceId}/clients");
     }
 
     /**
