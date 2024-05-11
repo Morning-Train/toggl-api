@@ -574,63 +574,55 @@ class TogglApi
     /**
      * Get single workspace.
      *
-     * @param int $wid
-     *
      * @return bool|mixed|object
      */
-    public function getWorkspace($wid)
+    public function getWorkspace()
     {
-        return $this->GET('workspaces/'.$wid);
+        return $this->GET("workspaces/{$this->workspaceId}");
     }
 
     /**
      * Update workspace.
      *
-     * @param int   $wid
      * @param array $workspace
      *
      * @return bool|mixed|object
      */
-    public function updateWorkspace($wid, $workspace)
+    public function updateWorkspace($workspace)
     {
-        return $this->PUT('workspaces/'.$wid, ['workspace' => $workspace]);
+        return $this->PUT("workspaces/{$this->workspaceId}", $workspace);
     }
 
     /**
      * Get workspaces users.
      *
-     * @param int $wid
-     *
      * @return bool|mixed|object
      */
-    public function getWorkspaceUsers($wid)
+    public function getWorkspaceUsers()
     {
-        return $this->GET('workspaces/'.$wid.'/users');
+        return $this->GET("workspaces/{$this->workspaceId}/users");
     }
 
     /**
      * Get workspace clients.
      *
-     * @param int $wid
-     *
      * @return bool|mixed|object
      */
-    public function getWorkspaceClients($wid)
+    public function getWorkspaceClients()
     {
-        return $this->GET('workspaces/'.$wid.'/clients');
+        return $this->GET("workspaces/{$this->workspaceId}/clients");
     }
 
     /**
      * Get workspace projects.
      *
-     * @param int   $workspaceId
      * @param array $options
      *
      * @return bool|mixed|object
      */
-    public function getWorkspaceProjects($workspaceId, $options = [])
+    public function getWorkspaceProjects($options = [])
     {
-        return $this->GET("workspaces/{$workspaceId}/projects", $options);
+        return $this->GET("workspaces/{$this->workspaceId}/projects", $options);
     }
 
     /**
@@ -642,7 +634,7 @@ class TogglApi
      */
     public function getProjects($options = [])
     {
-        return $this->GET("workspaces/{$this->workspaceId}/projects", $options);
+        return $this->getWorkspaceProjects($options);
     }
 
     /**
