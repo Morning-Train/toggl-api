@@ -846,11 +846,18 @@ class TogglApi extends BaseApiClass
      * @param array $timeEntryIds
      * @param array $entry
      *
+     * API now only supports adding tags to one entry at the time
+     * Make one PUT for each time entry id
+     *
      * @return bool|mixed|object
      */
     public function updateTagsForTimeEntries($timeEntryIds, $entry)
     {
-        return $this->PUT('time_entries/'.implode(',', $timeEntryIds), ['time_entry' => $entry]);
+        $result = [];
+        foreach($timeEntryIds as $tid) {
+            $result[$tid] = $this->PUT('time_entries/'.$tid, $entry);
+        }
+        return $result;
     }
 
     /**
