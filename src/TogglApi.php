@@ -915,7 +915,7 @@ class TogglApi
      */
     public function createTimeEntry($entry)
     {
-        return $this->POST('time_entries', ['time_entry' => $entry]);
+        return $this->POST('me/time_entries', ['time_entry' => $entry]);
     }
 
     /**
@@ -927,7 +927,7 @@ class TogglApi
      */
     public function startTimeEntry($entry)
     {
-        return $this->POST('time_entries/start', ['time_entry' => $entry]);
+        return $this->POST('me/time_entries/start', ['time_entry' => $entry]);
     }
 
     /**
@@ -939,7 +939,7 @@ class TogglApi
      */
     public function stopTimeEntry($timeEntryId)
     {
-        return $this->PUT('time_entries/'.$timeEntryId.'/stop');
+        return $this->PUT('me/time_entries/'.$timeEntryId.'/stop');
     }
 
     /**
@@ -951,7 +951,7 @@ class TogglApi
      */
     public function getTimeEntry($timeEntryId)
     {
-        return $this->GET('time_entries/'.$timeEntryId);
+        return $this->GET('me/time_entries/'.$timeEntryId);
     }
 
     /**
@@ -961,7 +961,7 @@ class TogglApi
      */
     public function getRunningTimeEntry()
     {
-        return $this->GET('time_entries/current');
+        return $this->GET('me/time_entries/current');
     }
 
     /**
@@ -971,7 +971,7 @@ class TogglApi
      */
     public function getTimeEntries()
     {
-        return $this->GET('time_entries');
+        return $this->GET('me/time_entries');
     }
 
     /**
@@ -984,7 +984,7 @@ class TogglApi
      */
     public function getTimeEntriesInRange($start, $end)
     {
-        return $this->GET('time_entries', ['start_date' => $start, 'end_date' => $end]);
+        return $this->GET('me/time_entries', ['start_date' => $start, 'end_date' => $end]);
     }
 
     /**
@@ -997,7 +997,7 @@ class TogglApi
      */
     public function updateTagsForTimeEntries($timeEntryIds, $entry)
     {
-        return $this->PUT('time_entries/'.implode(',', $timeEntryIds), ['time_entry' => $entry]);
+        return $this->PUT('me/time_entries/'.implode(',', $timeEntryIds), ['time_entry' => $entry]);
     }
 
     /**
@@ -1010,7 +1010,7 @@ class TogglApi
      */
     public function updateTimeEntry($timeEntryId, $entry)
     {
-        return $this->PUT('time_entries/'.$timeEntryId, ['time_entry' => $entry]);
+        return $this->PUT('me/time_entries/'.$timeEntryId, ['time_entry' => $entry]);
     }
 
     /**
@@ -1022,7 +1022,7 @@ class TogglApi
      */
     public function deleteTimeEntry($timeEntryId)
     {
-        return $this->DELETE('time_entries/'.$timeEntryId);
+        return $this->DELETE('me/time_entries/'.$timeEntryId);
     }
 
     /**
