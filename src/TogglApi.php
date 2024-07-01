@@ -646,19 +646,6 @@ class TogglApi
     }
 
     /**
-     * Get projects.
-     *
-     * @param int   $workspaceId
-     * @param array $options
-     *
-     * @return bool|mixed|object
-     */
-    public function getProjects($options = [])
-    {
-        return $this->GET("workspaces/{$this->workspaceId}/projects", $options);
-    }
-
-    /**
      * Get workspace tasks.
      *
      * @param int   $wid
