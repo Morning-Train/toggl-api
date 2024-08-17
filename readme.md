@@ -44,7 +44,7 @@ https://github.com/toggl/toggl_api_docs
 ### Initialization
 
 ```
-$toggl = new MorningTrain\TogglApi\TogglApi('my-api-token');
+$toggl = new MorningTrain\TogglApi\TogglApi('my-api-token', 'my-workspace-id');
 ```
 
 ### Get available endpoints
