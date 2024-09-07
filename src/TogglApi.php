@@ -355,7 +355,7 @@ class TogglApi
      */
     public function createProject($project)
     {
-        return $this->POST("workspaces/{$this->workspaceId}/projects", ['project' => $project]);
+        return $this->POST("workspaces/{$this->workspaceId}/projects", $project);
     }
 
     /**
@@ -368,7 +368,7 @@ class TogglApi
      */
     public function updateProject($projectId, $project)
     {
-        return $this->PUT("workspaces/{$this->workspaceId}/projects/{$projectId}", ['project' => $project]);
+        return $this->PUT("workspaces/{$this->workspaceId}/projects/{$projectId}", $project);
     }
 
     /**
@@ -381,18 +381,6 @@ class TogglApi
     public function deleteProject($projectId)
     {
         return $this->DELETE('projects/'.$projectId);
-    }
-
-    /**
-     * Delete multiple projects.
-     *
-     * @param array $projectIds
-     *
-     * @return bool|mixed|object
-     */
-    public function deleteProjects($projectIds)
-    {
-        return $this->DELETE('projects/'.implode(',', $projectIds));
     }
 
     /**
