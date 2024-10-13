@@ -265,7 +265,6 @@ class TogglApi
      *
      * - pid: project ID (integer, required)
      * - uid: user ID, who is added to the project (integer, required)
-     * - wid: workspace ID, where the project belongs to (integer, not-required, project's workspace id is used)
      * - manager: admin rights for this project (boolean, default false)
      * - rate: hourly rate for the project user (float, not-required, only for pro workspaces) in the currency of the project's client or in workspace default currency.
      * - at: timestamp that is sent in the response, indicates when the project user was last updated
@@ -274,21 +273,16 @@ class TogglApi
      *
      * @return bool|mixed|object
      *
-     * @see https://github.com/toggl/toggl_api_docs/blob/master/chapters/project_users.md
+     * @see https://engineering.toggl.com/docs/api/groups#post-adds-group-to-project
      */
-    public function createProjectGroup($project_id, $group_id, $data = [])
+    public function createProjectGroup($project_id, $group_id)
     {
         $data = [
-            'project_group' => array_merge(
-                [
-                    'pid' => $project_id,
-                    'group_ids' => [$group_id]
-                ],
-                $data
-            ),
+            'project_id' => $project_id,
+            'group_id' => $group_id
         ];
 
-        return $this->POST('project_groups', $data);
+        return $this->POST("workspaces/{$this->workspaceId}/project_groups", $data);
     }
 
     /**
@@ -301,7 +295,7 @@ class TogglApi
      */
     public function updateProjectGroup($projectGroupId, $data = [])
     {
-        return $this->PUT('project_groups/'.$projectGroupId, ['project_group' => $data]);
+        return $this->PUT("workspaces/{$this->workspaceId}/project_groups/{$projectGroupId}", $data);
     }
 
     /**
@@ -313,19 +307,7 @@ class TogglApi
      */
     public function deleteProjectGroup($projectGroupId)
     {
-        return $this->DELETE('project_groups/'.$projectGroupId);
-    }
-
-    /**
-     * Delete multiple project user relations.
-     *
-     * @param array $projectGroupIds
-     *
-     * @return bool|mixed|object
-     */
-    public function deleteProjectGroups($projectGroupIds)
-    {
-        return $this->DELETE('project_groups/'.implode(',', $projectGroupIds));
+        return $this->DELETE("workspaces/{$this->workspaceId}/project_groups/{$projectGroupId}");
     }
 
     /**
@@ -416,7 +398,17 @@ class TogglApi
      */
     public function getProjectGroupRelations($projectId)
     {
-        return $this->GET('projects/'.$projectId.'/project_groups');
+        return $this->GET("workspaces/{$this->workspaceId}/project_groups", ['project_ids' => $projectId]);
+    }
+
+    /**
+     * Get project group relations.
+     *
+     * @return bool|mixed|object
+     */
+    public function getProjectGroups()
+    {
+        return $this->GET("workspaces/{$this->workspaceId}/project_groups");
     }
 
     /**
